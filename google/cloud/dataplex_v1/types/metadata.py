@@ -19,19 +19,19 @@ from google.protobuf import timestamp_pb2  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package='google.cloud.dataplex.v1',
+    package="google.cloud.dataplex.v1",
     manifest={
-        'StorageSystem',
-        'ListEntitiesRequest',
-        'ListEntitiesResponse',
-        'GetEntityRequest',
-        'ListPartitionsRequest',
-        'ListPartitionsResponse',
-        'GetPartitionRequest',
-        'Entity',
-        'Partition',
-        'Schema',
-        'StorageFormat',
+        "StorageSystem",
+        "ListEntitiesRequest",
+        "ListEntitiesResponse",
+        "GetEntityRequest",
+        "ListPartitionsRequest",
+        "ListPartitionsResponse",
+        "GetPartitionRequest",
+        "Entity",
+        "Partition",
+        "Schema",
+        "StorageFormat",
     },
 )
 
@@ -68,33 +68,18 @@ class ListEntitiesRequest(proto.Message):
         filter (str):
             Optional. Filter request by name prefix.
     """
+
     class EntityView(proto.Enum):
         r"""Entity views."""
         ENTITY_VIEW_UNSPECIFIED = 0
         TABLES = 1
         FILESETS = 2
 
-    parent = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-    view = proto.Field(
-        proto.ENUM,
-        number=2,
-        enum=EntityView,
-    )
-    page_size = proto.Field(
-        proto.INT32,
-        number=3,
-    )
-    page_token = proto.Field(
-        proto.STRING,
-        number=4,
-    )
-    filter = proto.Field(
-        proto.STRING,
-        number=5,
-    )
+    parent = proto.Field(proto.STRING, number=1,)
+    view = proto.Field(proto.ENUM, number=2, enum=EntityView,)
+    page_size = proto.Field(proto.INT32, number=3,)
+    page_token = proto.Field(proto.STRING, number=4,)
+    filter = proto.Field(proto.STRING, number=5,)
 
 
 class ListEntitiesResponse(proto.Message):
@@ -113,15 +98,8 @@ class ListEntitiesResponse(proto.Message):
     def raw_page(self):
         return self
 
-    entities = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message='Entity',
-    )
-    next_page_token = proto.Field(
-        proto.STRING,
-        number=2,
-    )
+    entities = proto.RepeatedField(proto.MESSAGE, number=1, message="Entity",)
+    next_page_token = proto.Field(proto.STRING, number=2,)
 
 
 class GetEntityRequest(proto.Message):
@@ -135,6 +113,7 @@ class GetEntityRequest(proto.Message):
             Optional. Used to select the subset of entity information to
             return. Defaults to ``BASIC``.
     """
+
     class EntityView(proto.Enum):
         r"""Entity views for get entity partial result."""
         ENTITY_VIEW_UNSPECIFIED = 0
@@ -142,15 +121,8 @@ class GetEntityRequest(proto.Message):
         SCHEMA = 2
         FULL = 4
 
-    name = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-    view = proto.Field(
-        proto.ENUM,
-        number=2,
-        enum=EntityView,
-    )
+    name = proto.Field(proto.STRING, number=1,)
+    view = proto.Field(proto.ENUM, number=2, enum=EntityView,)
 
 
 class ListPartitionsRequest(proto.Message):
@@ -176,22 +148,10 @@ class ListPartitionsRequest(proto.Message):
             Optional. Filter request.
     """
 
-    parent = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-    page_size = proto.Field(
-        proto.INT32,
-        number=2,
-    )
-    page_token = proto.Field(
-        proto.STRING,
-        number=3,
-    )
-    filter = proto.Field(
-        proto.STRING,
-        number=4,
-    )
+    parent = proto.Field(proto.STRING, number=1,)
+    page_size = proto.Field(proto.INT32, number=2,)
+    page_token = proto.Field(proto.STRING, number=3,)
+    filter = proto.Field(proto.STRING, number=4,)
 
 
 class ListPartitionsResponse(proto.Message):
@@ -210,15 +170,8 @@ class ListPartitionsResponse(proto.Message):
     def raw_page(self):
         return self
 
-    partitions = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message='Partition',
-    )
-    next_page_token = proto.Field(
-        proto.STRING,
-        number=2,
-    )
+    partitions = proto.RepeatedField(proto.MESSAGE, number=1, message="Partition",)
+    next_page_token = proto.Field(proto.STRING, number=2,)
 
 
 class GetPartitionRequest(proto.Message):
@@ -230,10 +183,7 @@ class GetPartitionRequest(proto.Message):
             ``projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}/partitions/{partition_id}``.
     """
 
-    name = proto.Field(
-        proto.STRING,
-        number=1,
-    )
+    name = proto.Field(proto.STRING, number=1,)
 
 
 class Entity(proto.Message):
@@ -300,6 +250,7 @@ class Entity(proto.Message):
             included in ``SCHEMA`` and ``FULL`` entity views of a
             ``GetEntity`` response.
     """
+
     class Type(proto.Enum):
         r"""The type of entity."""
         TYPE_UNSPECIFIED = 0
@@ -333,97 +284,32 @@ class Entity(proto.Message):
                     store.
             """
 
-            compatible = proto.Field(
-                proto.BOOL,
-                number=1,
-            )
-            reason = proto.Field(
-                proto.STRING,
-                number=2,
-            )
+            compatible = proto.Field(proto.BOOL, number=1,)
+            reason = proto.Field(proto.STRING, number=2,)
 
         hive_metastore = proto.Field(
-            proto.MESSAGE,
-            number=1,
-            message='Entity.CompatibilityStatus.Compatibility',
+            proto.MESSAGE, number=1, message="Entity.CompatibilityStatus.Compatibility",
         )
         bigquery = proto.Field(
-            proto.MESSAGE,
-            number=2,
-            message='Entity.CompatibilityStatus.Compatibility',
+            proto.MESSAGE, number=2, message="Entity.CompatibilityStatus.Compatibility",
         )
 
-    name = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-    display_name = proto.Field(
-        proto.STRING,
-        number=2,
-    )
-    description = proto.Field(
-        proto.STRING,
-        number=3,
-    )
-    create_time = proto.Field(
-        proto.MESSAGE,
-        number=5,
-        message=timestamp_pb2.Timestamp,
-    )
-    update_time = proto.Field(
-        proto.MESSAGE,
-        number=6,
-        message=timestamp_pb2.Timestamp,
-    )
-    id = proto.Field(
-        proto.STRING,
-        number=7,
-    )
-    etag = proto.Field(
-        proto.STRING,
-        number=8,
-    )
-    type_ = proto.Field(
-        proto.ENUM,
-        number=10,
-        enum=Type,
-    )
-    asset = proto.Field(
-        proto.STRING,
-        number=11,
-    )
-    data_path = proto.Field(
-        proto.STRING,
-        number=12,
-    )
-    data_path_pattern = proto.Field(
-        proto.STRING,
-        number=13,
-    )
-    catalog_entry = proto.Field(
-        proto.STRING,
-        number=14,
-    )
-    system = proto.Field(
-        proto.ENUM,
-        number=15,
-        enum='StorageSystem',
-    )
-    format_ = proto.Field(
-        proto.MESSAGE,
-        number=16,
-        message='StorageFormat',
-    )
-    compatibility = proto.Field(
-        proto.MESSAGE,
-        number=19,
-        message=CompatibilityStatus,
-    )
-    schema = proto.Field(
-        proto.MESSAGE,
-        number=50,
-        message='Schema',
-    )
+    name = proto.Field(proto.STRING, number=1,)
+    display_name = proto.Field(proto.STRING, number=2,)
+    description = proto.Field(proto.STRING, number=3,)
+    create_time = proto.Field(proto.MESSAGE, number=5, message=timestamp_pb2.Timestamp,)
+    update_time = proto.Field(proto.MESSAGE, number=6, message=timestamp_pb2.Timestamp,)
+    id = proto.Field(proto.STRING, number=7,)
+    etag = proto.Field(proto.STRING, number=8,)
+    type_ = proto.Field(proto.ENUM, number=10, enum=Type,)
+    asset = proto.Field(proto.STRING, number=11,)
+    data_path = proto.Field(proto.STRING, number=12,)
+    data_path_pattern = proto.Field(proto.STRING, number=13,)
+    catalog_entry = proto.Field(proto.STRING, number=14,)
+    system = proto.Field(proto.ENUM, number=15, enum="StorageSystem",)
+    format_ = proto.Field(proto.MESSAGE, number=16, message="StorageFormat",)
+    compatibility = proto.Field(proto.MESSAGE, number=19, message=CompatibilityStatus,)
+    schema = proto.Field(proto.MESSAGE, number=50, message="Schema",)
 
 
 class Partition(proto.Message):
@@ -451,22 +337,10 @@ class Partition(proto.Message):
             server's etag.
     """
 
-    name = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-    values = proto.RepeatedField(
-        proto.STRING,
-        number=2,
-    )
-    location = proto.Field(
-        proto.STRING,
-        number=3,
-    )
-    etag = proto.Field(
-        proto.STRING,
-        number=4,
-    )
+    name = proto.Field(proto.STRING, number=1,)
+    values = proto.RepeatedField(proto.STRING, number=2,)
+    location = proto.Field(proto.STRING, number=3,)
+    etag = proto.Field(proto.STRING, number=4,)
 
 
 class Schema(proto.Message):
@@ -490,6 +364,7 @@ class Schema(proto.Message):
             Optional. The structure of paths containing
             partition data within the entity.
     """
+
     class Type(proto.Enum):
         r"""Type information for fields in schemas and partition schemas."""
         TYPE_UNSPECIFIED = 0
@@ -539,28 +414,12 @@ class Schema(proto.Message):
                 Optional. Any nested field for complex types.
         """
 
-        name = proto.Field(
-            proto.STRING,
-            number=1,
-        )
-        description = proto.Field(
-            proto.STRING,
-            number=2,
-        )
-        type_ = proto.Field(
-            proto.ENUM,
-            number=3,
-            enum='Schema.Type',
-        )
-        mode = proto.Field(
-            proto.ENUM,
-            number=4,
-            enum='Schema.Mode',
-        )
+        name = proto.Field(proto.STRING, number=1,)
+        description = proto.Field(proto.STRING, number=2,)
+        type_ = proto.Field(proto.ENUM, number=3, enum="Schema.Type",)
+        mode = proto.Field(proto.ENUM, number=4, enum="Schema.Mode",)
         fields = proto.RepeatedField(
-            proto.MESSAGE,
-            number=10,
-            message='Schema.SchemaField',
+            proto.MESSAGE, number=10, message="Schema.SchemaField",
         )
 
     class PartitionField(proto.Message):
@@ -574,35 +433,15 @@ class Schema(proto.Message):
                 Required. The type of field.
         """
 
-        name = proto.Field(
-            proto.STRING,
-            number=1,
-        )
-        type_ = proto.Field(
-            proto.ENUM,
-            number=2,
-            enum='Schema.Type',
-        )
+        name = proto.Field(proto.STRING, number=1,)
+        type_ = proto.Field(proto.ENUM, number=2, enum="Schema.Type",)
 
-    user_managed = proto.Field(
-        proto.BOOL,
-        number=1,
-    )
-    fields = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message=SchemaField,
-    )
+    user_managed = proto.Field(proto.BOOL, number=1,)
+    fields = proto.RepeatedField(proto.MESSAGE, number=2, message=SchemaField,)
     partition_fields = proto.RepeatedField(
-        proto.MESSAGE,
-        number=3,
-        message=PartitionField,
+        proto.MESSAGE, number=3, message=PartitionField,
     )
-    partition_style = proto.Field(
-        proto.ENUM,
-        number=4,
-        enum=PartitionStyle,
-    )
+    partition_style = proto.Field(proto.ENUM, number=4, enum=PartitionStyle,)
 
 
 class StorageFormat(proto.Message):
@@ -638,6 +477,7 @@ class StorageFormat(proto.Message):
 
             This field is a member of `oneof`_ ``options``.
     """
+
     class Format(proto.Enum):
         r"""The specific file format of the data."""
         FORMAT_UNSPECIFIED = 0
@@ -680,22 +520,10 @@ class StorageFormat(proto.Message):
                 data.
         """
 
-        encoding = proto.Field(
-            proto.STRING,
-            number=1,
-        )
-        header_rows = proto.Field(
-            proto.INT32,
-            number=2,
-        )
-        delimiter = proto.Field(
-            proto.STRING,
-            number=3,
-        )
-        quote = proto.Field(
-            proto.STRING,
-            number=4,
-        )
+        encoding = proto.Field(proto.STRING, number=1,)
+        header_rows = proto.Field(proto.INT32, number=2,)
+        delimiter = proto.Field(proto.STRING, number=3,)
+        quote = proto.Field(proto.STRING, number=4,)
 
     class JsonOptions(proto.Message):
         r"""Describes JSON data format.
@@ -706,37 +534,13 @@ class StorageFormat(proto.Message):
                 The default is UTF-8.
         """
 
-        encoding = proto.Field(
-            proto.STRING,
-            number=1,
-        )
+        encoding = proto.Field(proto.STRING, number=1,)
 
-    format_ = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=Format,
-    )
-    compression_format = proto.Field(
-        proto.ENUM,
-        number=2,
-        enum=CompressionFormat,
-    )
-    mime_type = proto.Field(
-        proto.STRING,
-        number=3,
-    )
-    csv = proto.Field(
-        proto.MESSAGE,
-        number=10,
-        oneof='options',
-        message=CsvOptions,
-    )
-    json = proto.Field(
-        proto.MESSAGE,
-        number=11,
-        oneof='options',
-        message=JsonOptions,
-    )
+    format_ = proto.Field(proto.ENUM, number=1, enum=Format,)
+    compression_format = proto.Field(proto.ENUM, number=2, enum=CompressionFormat,)
+    mime_type = proto.Field(proto.STRING, number=3,)
+    csv = proto.Field(proto.MESSAGE, number=10, oneof="options", message=CsvOptions,)
+    json = proto.Field(proto.MESSAGE, number=11, oneof="options", message=JsonOptions,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

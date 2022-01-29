@@ -25,7 +25,7 @@ from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 
-from google.cloud.dataplex_v1.types import metadata_
+from google.cloud.dataplex_v1.types import metadata
 
 try:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
@@ -189,8 +189,7 @@ class MetadataServiceTransport(abc.ABC):
     def get_entity(
         self,
     ) -> Callable[
-        [metadata_.GetEntityRequest],
-        Union[metadata_.Entity, Awaitable[metadata_.Entity]],
+        [metadata.GetEntityRequest], Union[metadata.Entity, Awaitable[metadata.Entity]]
     ]:
         raise NotImplementedError()
 
@@ -198,10 +197,8 @@ class MetadataServiceTransport(abc.ABC):
     def list_entities(
         self,
     ) -> Callable[
-        [metadata_.ListEntitiesRequest],
-        Union[
-            metadata_.ListEntitiesResponse, Awaitable[metadata_.ListEntitiesResponse]
-        ],
+        [metadata.ListEntitiesRequest],
+        Union[metadata.ListEntitiesResponse, Awaitable[metadata.ListEntitiesResponse]],
     ]:
         raise NotImplementedError()
 
@@ -209,8 +206,8 @@ class MetadataServiceTransport(abc.ABC):
     def get_partition(
         self,
     ) -> Callable[
-        [metadata_.GetPartitionRequest],
-        Union[metadata_.Partition, Awaitable[metadata_.Partition]],
+        [metadata.GetPartitionRequest],
+        Union[metadata.Partition, Awaitable[metadata.Partition]],
     ]:
         raise NotImplementedError()
 
@@ -218,10 +215,9 @@ class MetadataServiceTransport(abc.ABC):
     def list_partitions(
         self,
     ) -> Callable[
-        [metadata_.ListPartitionsRequest],
+        [metadata.ListPartitionsRequest],
         Union[
-            metadata_.ListPartitionsResponse,
-            Awaitable[metadata_.ListPartitionsResponse],
+            metadata.ListPartitionsResponse, Awaitable[metadata.ListPartitionsResponse]
         ],
     ]:
         raise NotImplementedError()

@@ -18,7 +18,7 @@ from .logs import (
     JobEvent,
     SessionEvent,
 )
-from .metadata_ import (
+from .metadata import (
     Entity,
     GetEntityRequest,
     GetPartitionRequest,

@@ -37,7 +37,7 @@ from google.cloud.dataplex_v1.services.metadata_service import (
 from google.cloud.dataplex_v1.services.metadata_service import MetadataServiceClient
 from google.cloud.dataplex_v1.services.metadata_service import pagers
 from google.cloud.dataplex_v1.services.metadata_service import transports
-from google.cloud.dataplex_v1.types import metadata_
+from google.cloud.dataplex_v1.types import metadata
 from google.oauth2 import service_account
 from google.protobuf import timestamp_pb2  # type: ignore
 import google.auth
@@ -607,7 +607,7 @@ def test_metadata_service_client_client_options_from_dict():
         )
 
 
-@pytest.mark.parametrize("request_type", [metadata_.GetEntityRequest, dict,])
+@pytest.mark.parametrize("request_type", [metadata.GetEntityRequest, dict,])
 def test_get_entity(request_type, transport: str = "grpc"):
     client = MetadataServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
@@ -620,39 +620,39 @@ def test_get_entity(request_type, transport: str = "grpc"):
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.get_entity), "__call__") as call:
         # Designate an appropriate return value for the call.
-        call.return_value = metadata_.Entity(
+        call.return_value = metadata.Entity(
             name="name_value",
             display_name="display_name_value",
             description="description_value",
             id="id_value",
             etag="etag_value",
-            type_=metadata_.Entity.Type.TABLE,
+            type_=metadata.Entity.Type.TABLE,
             asset="asset_value",
             data_path="data_path_value",
             data_path_pattern="data_path_pattern_value",
             catalog_entry="catalog_entry_value",
-            system=metadata_.StorageSystem.CLOUD_STORAGE,
+            system=metadata.StorageSystem.CLOUD_STORAGE,
         )
         response = client.get_entity(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0] == metadata_.GetEntityRequest()
+        assert args[0] == metadata.GetEntityRequest()
 
     # Establish that the response is the type that we expect.
-    assert isinstance(response, metadata_.Entity)
+    assert isinstance(response, metadata.Entity)
     assert response.name == "name_value"
     assert response.display_name == "display_name_value"
     assert response.description == "description_value"
     assert response.id == "id_value"
     assert response.etag == "etag_value"
-    assert response.type_ == metadata_.Entity.Type.TABLE
+    assert response.type_ == metadata.Entity.Type.TABLE
     assert response.asset == "asset_value"
     assert response.data_path == "data_path_value"
     assert response.data_path_pattern == "data_path_pattern_value"
     assert response.catalog_entry == "catalog_entry_value"
-    assert response.system == metadata_.StorageSystem.CLOUD_STORAGE
+    assert response.system == metadata.StorageSystem.CLOUD_STORAGE
 
 
 def test_get_entity_empty_call():
@@ -667,12 +667,12 @@ def test_get_entity_empty_call():
         client.get_entity()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-        assert args[0] == metadata_.GetEntityRequest()
+        assert args[0] == metadata.GetEntityRequest()
 
 
 @pytest.mark.asyncio
 async def test_get_entity_async(
-    transport: str = "grpc_asyncio", request_type=metadata_.GetEntityRequest
+    transport: str = "grpc_asyncio", request_type=metadata.GetEntityRequest
 ):
     client = MetadataServiceAsyncClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
@@ -686,18 +686,18 @@ async def test_get_entity_async(
     with mock.patch.object(type(client.transport.get_entity), "__call__") as call:
         # Designate an appropriate return value for the call.
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
-            metadata_.Entity(
+            metadata.Entity(
                 name="name_value",
                 display_name="display_name_value",
                 description="description_value",
                 id="id_value",
                 etag="etag_value",
-                type_=metadata_.Entity.Type.TABLE,
+                type_=metadata.Entity.Type.TABLE,
                 asset="asset_value",
                 data_path="data_path_value",
                 data_path_pattern="data_path_pattern_value",
                 catalog_entry="catalog_entry_value",
-                system=metadata_.StorageSystem.CLOUD_STORAGE,
+                system=metadata.StorageSystem.CLOUD_STORAGE,
             )
         )
         response = await client.get_entity(request)
@@ -705,21 +705,21 @@ async def test_get_entity_async(
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0] == metadata_.GetEntityRequest()
+        assert args[0] == metadata.GetEntityRequest()
 
     # Establish that the response is the type that we expect.
-    assert isinstance(response, metadata_.Entity)
+    assert isinstance(response, metadata.Entity)
     assert response.name == "name_value"
     assert response.display_name == "display_name_value"
     assert response.description == "description_value"
     assert response.id == "id_value"
     assert response.etag == "etag_value"
-    assert response.type_ == metadata_.Entity.Type.TABLE
+    assert response.type_ == metadata.Entity.Type.TABLE
     assert response.asset == "asset_value"
     assert response.data_path == "data_path_value"
     assert response.data_path_pattern == "data_path_pattern_value"
     assert response.catalog_entry == "catalog_entry_value"
-    assert response.system == metadata_.StorageSystem.CLOUD_STORAGE
+    assert response.system == metadata.StorageSystem.CLOUD_STORAGE
 
 
 @pytest.mark.asyncio
@@ -732,13 +732,13 @@ def test_get_entity_field_headers():
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
-    request = metadata_.GetEntityRequest()
+    request = metadata.GetEntityRequest()
 
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.get_entity), "__call__") as call:
-        call.return_value = metadata_.Entity()
+        call.return_value = metadata.Entity()
         client.get_entity(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -759,13 +759,13 @@ async def test_get_entity_field_headers_async():
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
-    request = metadata_.GetEntityRequest()
+    request = metadata.GetEntityRequest()
 
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.get_entity), "__call__") as call:
-        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(metadata_.Entity())
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(metadata.Entity())
         await client.get_entity(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -784,7 +784,7 @@ def test_get_entity_flattened():
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.get_entity), "__call__") as call:
         # Designate an appropriate return value for the call.
-        call.return_value = metadata_.Entity()
+        call.return_value = metadata.Entity()
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.get_entity(name="name_value",)
@@ -805,7 +805,7 @@ def test_get_entity_flattened_error():
     # fields is an error.
     with pytest.raises(ValueError):
         client.get_entity(
-            metadata_.GetEntityRequest(), name="name_value",
+            metadata.GetEntityRequest(), name="name_value",
         )
 
 
@@ -818,9 +818,9 @@ async def test_get_entity_flattened_async():
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.get_entity), "__call__") as call:
         # Designate an appropriate return value for the call.
-        call.return_value = metadata_.Entity()
+        call.return_value = metadata.Entity()
 
-        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(metadata_.Entity())
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(metadata.Entity())
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         response = await client.get_entity(name="name_value",)
@@ -844,11 +844,11 @@ async def test_get_entity_flattened_error_async():
     # fields is an error.
     with pytest.raises(ValueError):
         await client.get_entity(
-            metadata_.GetEntityRequest(), name="name_value",
+            metadata.GetEntityRequest(), name="name_value",
         )
 
 
-@pytest.mark.parametrize("request_type", [metadata_.ListEntitiesRequest, dict,])
+@pytest.mark.parametrize("request_type", [metadata.ListEntitiesRequest, dict,])
 def test_list_entities(request_type, transport: str = "grpc"):
     client = MetadataServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
@@ -861,7 +861,7 @@ def test_list_entities(request_type, transport: str = "grpc"):
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_entities), "__call__") as call:
         # Designate an appropriate return value for the call.
-        call.return_value = metadata_.ListEntitiesResponse(
+        call.return_value = metadata.ListEntitiesResponse(
             next_page_token="next_page_token_value",
         )
         response = client.list_entities(request)
@@ -869,7 +869,7 @@ def test_list_entities(request_type, transport: str = "grpc"):
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0] == metadata_.ListEntitiesRequest()
+        assert args[0] == metadata.ListEntitiesRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, pagers.ListEntitiesPager)
@@ -888,12 +888,12 @@ def test_list_entities_empty_call():
         client.list_entities()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-        assert args[0] == metadata_.ListEntitiesRequest()
+        assert args[0] == metadata.ListEntitiesRequest()
 
 
 @pytest.mark.asyncio
 async def test_list_entities_async(
-    transport: str = "grpc_asyncio", request_type=metadata_.ListEntitiesRequest
+    transport: str = "grpc_asyncio", request_type=metadata.ListEntitiesRequest
 ):
     client = MetadataServiceAsyncClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
@@ -907,14 +907,14 @@ async def test_list_entities_async(
     with mock.patch.object(type(client.transport.list_entities), "__call__") as call:
         # Designate an appropriate return value for the call.
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
-            metadata_.ListEntitiesResponse(next_page_token="next_page_token_value",)
+            metadata.ListEntitiesResponse(next_page_token="next_page_token_value",)
         )
         response = await client.list_entities(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0] == metadata_.ListEntitiesRequest()
+        assert args[0] == metadata.ListEntitiesRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, pagers.ListEntitiesAsyncPager)
@@ -931,13 +931,13 @@ def test_list_entities_field_headers():
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
-    request = metadata_.ListEntitiesRequest()
+    request = metadata.ListEntitiesRequest()
 
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_entities), "__call__") as call:
-        call.return_value = metadata_.ListEntitiesResponse()
+        call.return_value = metadata.ListEntitiesResponse()
         client.list_entities(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -958,14 +958,14 @@ async def test_list_entities_field_headers_async():
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
-    request = metadata_.ListEntitiesRequest()
+    request = metadata.ListEntitiesRequest()
 
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_entities), "__call__") as call:
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
-            metadata_.ListEntitiesResponse()
+            metadata.ListEntitiesResponse()
         )
         await client.list_entities(request)
 
@@ -985,7 +985,7 @@ def test_list_entities_flattened():
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_entities), "__call__") as call:
         # Designate an appropriate return value for the call.
-        call.return_value = metadata_.ListEntitiesResponse()
+        call.return_value = metadata.ListEntitiesResponse()
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.list_entities(parent="parent_value",)
@@ -1006,7 +1006,7 @@ def test_list_entities_flattened_error():
     # fields is an error.
     with pytest.raises(ValueError):
         client.list_entities(
-            metadata_.ListEntitiesRequest(), parent="parent_value",
+            metadata.ListEntitiesRequest(), parent="parent_value",
         )
 
 
@@ -1019,10 +1019,10 @@ async def test_list_entities_flattened_async():
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_entities), "__call__") as call:
         # Designate an appropriate return value for the call.
-        call.return_value = metadata_.ListEntitiesResponse()
+        call.return_value = metadata.ListEntitiesResponse()
 
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
-            metadata_.ListEntitiesResponse()
+            metadata.ListEntitiesResponse()
         )
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
@@ -1047,7 +1047,7 @@ async def test_list_entities_flattened_error_async():
     # fields is an error.
     with pytest.raises(ValueError):
         await client.list_entities(
-            metadata_.ListEntitiesRequest(), parent="parent_value",
+            metadata.ListEntitiesRequest(), parent="parent_value",
         )
 
 
@@ -1060,16 +1060,16 @@ def test_list_entities_pager(transport_name: str = "grpc"):
     with mock.patch.object(type(client.transport.list_entities), "__call__") as call:
         # Set the response to a series of pages.
         call.side_effect = (
-            metadata_.ListEntitiesResponse(
-                entities=[metadata_.Entity(), metadata_.Entity(), metadata_.Entity(),],
+            metadata.ListEntitiesResponse(
+                entities=[metadata.Entity(), metadata.Entity(), metadata.Entity(),],
                 next_page_token="abc",
             ),
-            metadata_.ListEntitiesResponse(entities=[], next_page_token="def",),
-            metadata_.ListEntitiesResponse(
-                entities=[metadata_.Entity(),], next_page_token="ghi",
+            metadata.ListEntitiesResponse(entities=[], next_page_token="def",),
+            metadata.ListEntitiesResponse(
+                entities=[metadata.Entity(),], next_page_token="ghi",
             ),
-            metadata_.ListEntitiesResponse(
-                entities=[metadata_.Entity(), metadata_.Entity(),],
+            metadata.ListEntitiesResponse(
+                entities=[metadata.Entity(), metadata.Entity(),],
             ),
             RuntimeError,
         )
@@ -1084,7 +1084,7 @@ def test_list_entities_pager(transport_name: str = "grpc"):
 
         results = [i for i in pager]
         assert len(results) == 6
-        assert all(isinstance(i, metadata_.Entity) for i in results)
+        assert all(isinstance(i, metadata.Entity) for i in results)
 
 
 def test_list_entities_pages(transport_name: str = "grpc"):
@@ -1096,16 +1096,16 @@ def test_list_entities_pages(transport_name: str = "grpc"):
     with mock.patch.object(type(client.transport.list_entities), "__call__") as call:
         # Set the response to a series of pages.
         call.side_effect = (
-            metadata_.ListEntitiesResponse(
-                entities=[metadata_.Entity(), metadata_.Entity(), metadata_.Entity(),],
+            metadata.ListEntitiesResponse(
+                entities=[metadata.Entity(), metadata.Entity(), metadata.Entity(),],
                 next_page_token="abc",
             ),
-            metadata_.ListEntitiesResponse(entities=[], next_page_token="def",),
-            metadata_.ListEntitiesResponse(
-                entities=[metadata_.Entity(),], next_page_token="ghi",
+            metadata.ListEntitiesResponse(entities=[], next_page_token="def",),
+            metadata.ListEntitiesResponse(
+                entities=[metadata.Entity(),], next_page_token="ghi",
             ),
-            metadata_.ListEntitiesResponse(
-                entities=[metadata_.Entity(), metadata_.Entity(),],
+            metadata.ListEntitiesResponse(
+                entities=[metadata.Entity(), metadata.Entity(),],
             ),
             RuntimeError,
         )
@@ -1126,16 +1126,16 @@ async def test_list_entities_async_pager():
     ) as call:
         # Set the response to a series of pages.
         call.side_effect = (
-            metadata_.ListEntitiesResponse(
-                entities=[metadata_.Entity(), metadata_.Entity(), metadata_.Entity(),],
+            metadata.ListEntitiesResponse(
+                entities=[metadata.Entity(), metadata.Entity(), metadata.Entity(),],
                 next_page_token="abc",
             ),
-            metadata_.ListEntitiesResponse(entities=[], next_page_token="def",),
-            metadata_.ListEntitiesResponse(
-                entities=[metadata_.Entity(),], next_page_token="ghi",
+            metadata.ListEntitiesResponse(entities=[], next_page_token="def",),
+            metadata.ListEntitiesResponse(
+                entities=[metadata.Entity(),], next_page_token="ghi",
             ),
-            metadata_.ListEntitiesResponse(
-                entities=[metadata_.Entity(), metadata_.Entity(),],
+            metadata.ListEntitiesResponse(
+                entities=[metadata.Entity(), metadata.Entity(),],
             ),
             RuntimeError,
         )
@@ -1146,7 +1146,7 @@ async def test_list_entities_async_pager():
             responses.append(response)
 
         assert len(responses) == 6
-        assert all(isinstance(i, metadata_.Entity) for i in responses)
+        assert all(isinstance(i, metadata.Entity) for i in responses)
 
 
 @pytest.mark.asyncio
@@ -1161,16 +1161,16 @@ async def test_list_entities_async_pages():
     ) as call:
         # Set the response to a series of pages.
         call.side_effect = (
-            metadata_.ListEntitiesResponse(
-                entities=[metadata_.Entity(), metadata_.Entity(), metadata_.Entity(),],
+            metadata.ListEntitiesResponse(
+                entities=[metadata.Entity(), metadata.Entity(), metadata.Entity(),],
                 next_page_token="abc",
             ),
-            metadata_.ListEntitiesResponse(entities=[], next_page_token="def",),
-            metadata_.ListEntitiesResponse(
-                entities=[metadata_.Entity(),], next_page_token="ghi",
+            metadata.ListEntitiesResponse(entities=[], next_page_token="def",),
+            metadata.ListEntitiesResponse(
+                entities=[metadata.Entity(),], next_page_token="ghi",
             ),
-            metadata_.ListEntitiesResponse(
-                entities=[metadata_.Entity(), metadata_.Entity(),],
+            metadata.ListEntitiesResponse(
+                entities=[metadata.Entity(), metadata.Entity(),],
             ),
             RuntimeError,
         )
@@ -1181,7 +1181,7 @@ async def test_list_entities_async_pages():
             assert page_.raw_page.next_page_token == token
 
 
-@pytest.mark.parametrize("request_type", [metadata_.GetPartitionRequest, dict,])
+@pytest.mark.parametrize("request_type", [metadata.GetPartitionRequest, dict,])
 def test_get_partition(request_type, transport: str = "grpc"):
     client = MetadataServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
@@ -1194,7 +1194,7 @@ def test_get_partition(request_type, transport: str = "grpc"):
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.get_partition), "__call__") as call:
         # Designate an appropriate return value for the call.
-        call.return_value = metadata_.Partition(
+        call.return_value = metadata.Partition(
             name="name_value",
             values=["values_value"],
             location="location_value",
@@ -1205,10 +1205,10 @@ def test_get_partition(request_type, transport: str = "grpc"):
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0] == metadata_.GetPartitionRequest()
+        assert args[0] == metadata.GetPartitionRequest()
 
     # Establish that the response is the type that we expect.
-    assert isinstance(response, metadata_.Partition)
+    assert isinstance(response, metadata.Partition)
     assert response.name == "name_value"
     assert response.values == ["values_value"]
     assert response.location == "location_value"
@@ -1227,12 +1227,12 @@ def test_get_partition_empty_call():
         client.get_partition()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-        assert args[0] == metadata_.GetPartitionRequest()
+        assert args[0] == metadata.GetPartitionRequest()
 
 
 @pytest.mark.asyncio
 async def test_get_partition_async(
-    transport: str = "grpc_asyncio", request_type=metadata_.GetPartitionRequest
+    transport: str = "grpc_asyncio", request_type=metadata.GetPartitionRequest
 ):
     client = MetadataServiceAsyncClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
@@ -1246,7 +1246,7 @@ async def test_get_partition_async(
     with mock.patch.object(type(client.transport.get_partition), "__call__") as call:
         # Designate an appropriate return value for the call.
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
-            metadata_.Partition(
+            metadata.Partition(
                 name="name_value",
                 values=["values_value"],
                 location="location_value",
@@ -1258,10 +1258,10 @@ async def test_get_partition_async(
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0] == metadata_.GetPartitionRequest()
+        assert args[0] == metadata.GetPartitionRequest()
 
     # Establish that the response is the type that we expect.
-    assert isinstance(response, metadata_.Partition)
+    assert isinstance(response, metadata.Partition)
     assert response.name == "name_value"
     assert response.values == ["values_value"]
     assert response.location == "location_value"
@@ -1278,13 +1278,13 @@ def test_get_partition_field_headers():
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
-    request = metadata_.GetPartitionRequest()
+    request = metadata.GetPartitionRequest()
 
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.get_partition), "__call__") as call:
-        call.return_value = metadata_.Partition()
+        call.return_value = metadata.Partition()
         client.get_partition(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -1305,13 +1305,13 @@ async def test_get_partition_field_headers_async():
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
-    request = metadata_.GetPartitionRequest()
+    request = metadata.GetPartitionRequest()
 
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.get_partition), "__call__") as call:
-        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(metadata_.Partition())
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(metadata.Partition())
         await client.get_partition(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -1330,7 +1330,7 @@ def test_get_partition_flattened():
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.get_partition), "__call__") as call:
         # Designate an appropriate return value for the call.
-        call.return_value = metadata_.Partition()
+        call.return_value = metadata.Partition()
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.get_partition(name="name_value",)
@@ -1351,7 +1351,7 @@ def test_get_partition_flattened_error():
     # fields is an error.
     with pytest.raises(ValueError):
         client.get_partition(
-            metadata_.GetPartitionRequest(), name="name_value",
+            metadata.GetPartitionRequest(), name="name_value",
         )
 
 
@@ -1364,9 +1364,9 @@ async def test_get_partition_flattened_async():
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.get_partition), "__call__") as call:
         # Designate an appropriate return value for the call.
-        call.return_value = metadata_.Partition()
+        call.return_value = metadata.Partition()
 
-        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(metadata_.Partition())
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(metadata.Partition())
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         response = await client.get_partition(name="name_value",)
@@ -1390,11 +1390,11 @@ async def test_get_partition_flattened_error_async():
     # fields is an error.
     with pytest.raises(ValueError):
         await client.get_partition(
-            metadata_.GetPartitionRequest(), name="name_value",
+            metadata.GetPartitionRequest(), name="name_value",
         )
 
 
-@pytest.mark.parametrize("request_type", [metadata_.ListPartitionsRequest, dict,])
+@pytest.mark.parametrize("request_type", [metadata.ListPartitionsRequest, dict,])
 def test_list_partitions(request_type, transport: str = "grpc"):
     client = MetadataServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
@@ -1407,7 +1407,7 @@ def test_list_partitions(request_type, transport: str = "grpc"):
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_partitions), "__call__") as call:
         # Designate an appropriate return value for the call.
-        call.return_value = metadata_.ListPartitionsResponse(
+        call.return_value = metadata.ListPartitionsResponse(
             next_page_token="next_page_token_value",
         )
         response = client.list_partitions(request)
@@ -1415,7 +1415,7 @@ def test_list_partitions(request_type, transport: str = "grpc"):
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0] == metadata_.ListPartitionsRequest()
+        assert args[0] == metadata.ListPartitionsRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, pagers.ListPartitionsPager)
@@ -1434,12 +1434,12 @@ def test_list_partitions_empty_call():
         client.list_partitions()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-        assert args[0] == metadata_.ListPartitionsRequest()
+        assert args[0] == metadata.ListPartitionsRequest()
 
 
 @pytest.mark.asyncio
 async def test_list_partitions_async(
-    transport: str = "grpc_asyncio", request_type=metadata_.ListPartitionsRequest
+    transport: str = "grpc_asyncio", request_type=metadata.ListPartitionsRequest
 ):
     client = MetadataServiceAsyncClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
@@ -1453,14 +1453,14 @@ async def test_list_partitions_async(
     with mock.patch.object(type(client.transport.list_partitions), "__call__") as call:
         # Designate an appropriate return value for the call.
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
-            metadata_.ListPartitionsResponse(next_page_token="next_page_token_value",)
+            metadata.ListPartitionsResponse(next_page_token="next_page_token_value",)
         )
         response = await client.list_partitions(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0] == metadata_.ListPartitionsRequest()
+        assert args[0] == metadata.ListPartitionsRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, pagers.ListPartitionsAsyncPager)
@@ -1477,13 +1477,13 @@ def test_list_partitions_field_headers():
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
-    request = metadata_.ListPartitionsRequest()
+    request = metadata.ListPartitionsRequest()
 
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_partitions), "__call__") as call:
-        call.return_value = metadata_.ListPartitionsResponse()
+        call.return_value = metadata.ListPartitionsResponse()
         client.list_partitions(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -1504,14 +1504,14 @@ async def test_list_partitions_field_headers_async():
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
-    request = metadata_.ListPartitionsRequest()
+    request = metadata.ListPartitionsRequest()
 
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_partitions), "__call__") as call:
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
-            metadata_.ListPartitionsResponse()
+            metadata.ListPartitionsResponse()
         )
         await client.list_partitions(request)
 
@@ -1531,7 +1531,7 @@ def test_list_partitions_flattened():
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_partitions), "__call__") as call:
         # Designate an appropriate return value for the call.
-        call.return_value = metadata_.ListPartitionsResponse()
+        call.return_value = metadata.ListPartitionsResponse()
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.list_partitions(parent="parent_value",)
@@ -1552,7 +1552,7 @@ def test_list_partitions_flattened_error():
     # fields is an error.
     with pytest.raises(ValueError):
         client.list_partitions(
-            metadata_.ListPartitionsRequest(), parent="parent_value",
+            metadata.ListPartitionsRequest(), parent="parent_value",
         )
 
 
@@ -1565,10 +1565,10 @@ async def test_list_partitions_flattened_async():
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_partitions), "__call__") as call:
         # Designate an appropriate return value for the call.
-        call.return_value = metadata_.ListPartitionsResponse()
+        call.return_value = metadata.ListPartitionsResponse()
 
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
-            metadata_.ListPartitionsResponse()
+            metadata.ListPartitionsResponse()
         )
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
@@ -1593,7 +1593,7 @@ async def test_list_partitions_flattened_error_async():
     # fields is an error.
     with pytest.raises(ValueError):
         await client.list_partitions(
-            metadata_.ListPartitionsRequest(), parent="parent_value",
+            metadata.ListPartitionsRequest(), parent="parent_value",
         )
 
 
@@ -1606,20 +1606,20 @@ def test_list_partitions_pager(transport_name: str = "grpc"):
     with mock.patch.object(type(client.transport.list_partitions), "__call__") as call:
         # Set the response to a series of pages.
         call.side_effect = (
-            metadata_.ListPartitionsResponse(
+            metadata.ListPartitionsResponse(
                 partitions=[
-                    metadata_.Partition(),
-                    metadata_.Partition(),
-                    metadata_.Partition(),
+                    metadata.Partition(),
+                    metadata.Partition(),
+                    metadata.Partition(),
                 ],
                 next_page_token="abc",
             ),
-            metadata_.ListPartitionsResponse(partitions=[], next_page_token="def",),
-            metadata_.ListPartitionsResponse(
-                partitions=[metadata_.Partition(),], next_page_token="ghi",
+            metadata.ListPartitionsResponse(partitions=[], next_page_token="def",),
+            metadata.ListPartitionsResponse(
+                partitions=[metadata.Partition(),], next_page_token="ghi",
             ),
-            metadata_.ListPartitionsResponse(
-                partitions=[metadata_.Partition(), metadata_.Partition(),],
+            metadata.ListPartitionsResponse(
+                partitions=[metadata.Partition(), metadata.Partition(),],
             ),
             RuntimeError,
         )
@@ -1634,7 +1634,7 @@ def test_list_partitions_pager(transport_name: str = "grpc"):
 
         results = [i for i in pager]
         assert len(results) == 6
-        assert all(isinstance(i, metadata_.Partition) for i in results)
+        assert all(isinstance(i, metadata.Partition) for i in results)
 
 
 def test_list_partitions_pages(transport_name: str = "grpc"):
@@ -1646,20 +1646,20 @@ def test_list_partitions_pages(transport_name: str = "grpc"):
     with mock.patch.object(type(client.transport.list_partitions), "__call__") as call:
         # Set the response to a series of pages.
         call.side_effect = (
-            metadata_.ListPartitionsResponse(
+            metadata.ListPartitionsResponse(
                 partitions=[
-                    metadata_.Partition(),
-                    metadata_.Partition(),
-                    metadata_.Partition(),
+                    metadata.Partition(),
+                    metadata.Partition(),
+                    metadata.Partition(),
                 ],
                 next_page_token="abc",
             ),
-            metadata_.ListPartitionsResponse(partitions=[], next_page_token="def",),
-            metadata_.ListPartitionsResponse(
-                partitions=[metadata_.Partition(),], next_page_token="ghi",
+            metadata.ListPartitionsResponse(partitions=[], next_page_token="def",),
+            metadata.ListPartitionsResponse(
+                partitions=[metadata.Partition(),], next_page_token="ghi",
             ),
-            metadata_.ListPartitionsResponse(
-                partitions=[metadata_.Partition(), metadata_.Partition(),],
+            metadata.ListPartitionsResponse(
+                partitions=[metadata.Partition(), metadata.Partition(),],
             ),
             RuntimeError,
         )
@@ -1680,20 +1680,20 @@ async def test_list_partitions_async_pager():
     ) as call:
         # Set the response to a series of pages.
         call.side_effect = (
-            metadata_.ListPartitionsResponse(
+            metadata.ListPartitionsResponse(
                 partitions=[
-                    metadata_.Partition(),
-                    metadata_.Partition(),
-                    metadata_.Partition(),
+                    metadata.Partition(),
+                    metadata.Partition(),
+                    metadata.Partition(),
                 ],
                 next_page_token="abc",
             ),
-            metadata_.ListPartitionsResponse(partitions=[], next_page_token="def",),
-            metadata_.ListPartitionsResponse(
-                partitions=[metadata_.Partition(),], next_page_token="ghi",
+            metadata.ListPartitionsResponse(partitions=[], next_page_token="def",),
+            metadata.ListPartitionsResponse(
+                partitions=[metadata.Partition(),], next_page_token="ghi",
             ),
-            metadata_.ListPartitionsResponse(
-                partitions=[metadata_.Partition(), metadata_.Partition(),],
+            metadata.ListPartitionsResponse(
+                partitions=[metadata.Partition(), metadata.Partition(),],
             ),
             RuntimeError,
         )
@@ -1704,7 +1704,7 @@ async def test_list_partitions_async_pager():
             responses.append(response)
 
         assert len(responses) == 6
-        assert all(isinstance(i, metadata_.Partition) for i in responses)
+        assert all(isinstance(i, metadata.Partition) for i in responses)
 
 
 @pytest.mark.asyncio
@@ -1719,20 +1719,20 @@ async def test_list_partitions_async_pages():
     ) as call:
         # Set the response to a series of pages.
         call.side_effect = (
-            metadata_.ListPartitionsResponse(
+            metadata.ListPartitionsResponse(
                 partitions=[
-                    metadata_.Partition(),
-                    metadata_.Partition(),
-                    metadata_.Partition(),
+                    metadata.Partition(),
+                    metadata.Partition(),
+                    metadata.Partition(),
                 ],
                 next_page_token="abc",
             ),
-            metadata_.ListPartitionsResponse(partitions=[], next_page_token="def",),
-            metadata_.ListPartitionsResponse(
-                partitions=[metadata_.Partition(),], next_page_token="ghi",
+            metadata.ListPartitionsResponse(partitions=[], next_page_token="def",),
+            metadata.ListPartitionsResponse(
+                partitions=[metadata.Partition(),], next_page_token="ghi",
             ),
-            metadata_.ListPartitionsResponse(
-                partitions=[metadata_.Partition(), metadata_.Partition(),],
+            metadata.ListPartitionsResponse(
+                partitions=[metadata.Partition(), metadata.Partition(),],
             ),
             RuntimeError,
         )

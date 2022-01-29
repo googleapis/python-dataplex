@@ -32,7 +32,7 @@ except AttributeError:  # pragma: NO COVER
     OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.cloud.dataplex_v1.services.metadata_service import pagers
-from google.cloud.dataplex_v1.types import metadata_
+from google.cloud.dataplex_v1.types import metadata
 from google.protobuf import timestamp_pb2  # type: ignore
 from .transports.base import MetadataServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc_asyncio import MetadataServiceGrpcAsyncIOTransport
@@ -211,13 +211,13 @@ class MetadataServiceAsyncClient:
 
     async def get_entity(
         self,
-        request: Union[metadata_.GetEntityRequest, dict] = None,
+        request: Union[metadata.GetEntityRequest, dict] = None,
         *,
         name: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> metadata_.Entity:
+    ) -> metadata.Entity:
         r"""Get a metadata entity.
 
         Args:
@@ -252,7 +252,7 @@ class MetadataServiceAsyncClient:
                 "the individual field arguments should be set."
             )
 
-        request = metadata_.GetEntityRequest(request)
+        request = metadata.GetEntityRequest(request)
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
@@ -290,7 +290,7 @@ class MetadataServiceAsyncClient:
 
     async def list_entities(
         self,
-        request: Union[metadata_.ListEntitiesRequest, dict] = None,
+        request: Union[metadata.ListEntitiesRequest, dict] = None,
         *,
         parent: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
@@ -333,7 +333,7 @@ class MetadataServiceAsyncClient:
                 "the individual field arguments should be set."
             )
 
-        request = metadata_.ListEntitiesRequest(request)
+        request = metadata.ListEntitiesRequest(request)
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
@@ -377,13 +377,13 @@ class MetadataServiceAsyncClient:
 
     async def get_partition(
         self,
-        request: Union[metadata_.GetPartitionRequest, dict] = None,
+        request: Union[metadata.GetPartitionRequest, dict] = None,
         *,
         name: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> metadata_.Partition:
+    ) -> metadata.Partition:
         r"""Get a metadata partition of an entity.
 
         Args:
@@ -418,7 +418,7 @@ class MetadataServiceAsyncClient:
                 "the individual field arguments should be set."
             )
 
-        request = metadata_.GetPartitionRequest(request)
+        request = metadata.GetPartitionRequest(request)
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
@@ -456,7 +456,7 @@ class MetadataServiceAsyncClient:
 
     async def list_partitions(
         self,
-        request: Union[metadata_.ListPartitionsRequest, dict] = None,
+        request: Union[metadata.ListPartitionsRequest, dict] = None,
         *,
         parent: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
@@ -499,7 +499,7 @@ class MetadataServiceAsyncClient:
                 "the individual field arguments should be set."
             )
 
-        request = metadata_.ListPartitionsRequest(request)
+        request = metadata.ListPartitionsRequest(request)
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.

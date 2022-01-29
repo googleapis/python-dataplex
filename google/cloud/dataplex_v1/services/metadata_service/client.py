@@ -35,7 +35,7 @@ except AttributeError:  # pragma: NO COVER
     OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.cloud.dataplex_v1.services.metadata_service import pagers
-from google.cloud.dataplex_v1.types import metadata_
+from google.cloud.dataplex_v1.types import metadata
 from google.protobuf import timestamp_pb2  # type: ignore
 from .transports.base import MetadataServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc import MetadataServiceGrpcTransport
@@ -445,13 +445,13 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def get_entity(
         self,
-        request: Union[metadata_.GetEntityRequest, dict] = None,
+        request: Union[metadata.GetEntityRequest, dict] = None,
         *,
         name: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> metadata_.Entity:
+    ) -> metadata.Entity:
         r"""Get a metadata entity.
 
         Args:
@@ -487,11 +487,11 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
             )
 
         # Minor optimization to avoid making a copy if the user passes
-        # in a metadata_.GetEntityRequest.
+        # in a metadata.GetEntityRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, metadata_.GetEntityRequest):
-            request = metadata_.GetEntityRequest(request)
+        if not isinstance(request, metadata.GetEntityRequest):
+            request = metadata.GetEntityRequest(request)
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
             if name is not None:
@@ -515,7 +515,7 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def list_entities(
         self,
-        request: Union[metadata_.ListEntitiesRequest, dict] = None,
+        request: Union[metadata.ListEntitiesRequest, dict] = None,
         *,
         parent: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
@@ -559,11 +559,11 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
             )
 
         # Minor optimization to avoid making a copy if the user passes
-        # in a metadata_.ListEntitiesRequest.
+        # in a metadata.ListEntitiesRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, metadata_.ListEntitiesRequest):
-            request = metadata_.ListEntitiesRequest(request)
+        if not isinstance(request, metadata.ListEntitiesRequest):
+            request = metadata.ListEntitiesRequest(request)
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
             if parent is not None:
@@ -593,13 +593,13 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def get_partition(
         self,
-        request: Union[metadata_.GetPartitionRequest, dict] = None,
+        request: Union[metadata.GetPartitionRequest, dict] = None,
         *,
         name: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> metadata_.Partition:
+    ) -> metadata.Partition:
         r"""Get a metadata partition of an entity.
 
         Args:
@@ -635,11 +635,11 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
             )
 
         # Minor optimization to avoid making a copy if the user passes
-        # in a metadata_.GetPartitionRequest.
+        # in a metadata.GetPartitionRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, metadata_.GetPartitionRequest):
-            request = metadata_.GetPartitionRequest(request)
+        if not isinstance(request, metadata.GetPartitionRequest):
+            request = metadata.GetPartitionRequest(request)
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
             if name is not None:
@@ -663,7 +663,7 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def list_partitions(
         self,
-        request: Union[metadata_.ListPartitionsRequest, dict] = None,
+        request: Union[metadata.ListPartitionsRequest, dict] = None,
         *,
         parent: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
@@ -707,11 +707,11 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
             )
 
         # Minor optimization to avoid making a copy if the user passes
-        # in a metadata_.ListPartitionsRequest.
+        # in a metadata.ListPartitionsRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, metadata_.ListPartitionsRequest):
-            request = metadata_.ListPartitionsRequest(request)
+        if not isinstance(request, metadata.ListPartitionsRequest):
+            request = metadata.ListPartitionsRequest(request)
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
             if parent is not None:

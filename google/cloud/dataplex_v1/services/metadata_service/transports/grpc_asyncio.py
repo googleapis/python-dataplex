@@ -24,7 +24,7 @@ from google.auth.transport.grpc import SslCredentials  # type: ignore
 import grpc  # type: ignore
 from grpc.experimental import aio  # type: ignore
 
-from google.cloud.dataplex_v1.types import metadata_
+from google.cloud.dataplex_v1.types import metadata
 from .base import MetadataServiceTransport, DEFAULT_CLIENT_INFO
 from .grpc import MetadataServiceGrpcTransport
 
@@ -234,7 +234,7 @@ class MetadataServiceGrpcAsyncIOTransport(MetadataServiceTransport):
     @property
     def get_entity(
         self,
-    ) -> Callable[[metadata_.GetEntityRequest], Awaitable[metadata_.Entity]]:
+    ) -> Callable[[metadata.GetEntityRequest], Awaitable[metadata.Entity]]:
         r"""Return a callable for the get entity method over gRPC.
 
         Get a metadata entity.
@@ -252,8 +252,8 @@ class MetadataServiceGrpcAsyncIOTransport(MetadataServiceTransport):
         if "get_entity" not in self._stubs:
             self._stubs["get_entity"] = self.grpc_channel.unary_unary(
                 "/google.cloud.dataplex.v1.MetadataService/GetEntity",
-                request_serializer=metadata_.GetEntityRequest.serialize,
-                response_deserializer=metadata_.Entity.deserialize,
+                request_serializer=metadata.GetEntityRequest.serialize,
+                response_deserializer=metadata.Entity.deserialize,
             )
         return self._stubs["get_entity"]
 
@@ -261,7 +261,7 @@ class MetadataServiceGrpcAsyncIOTransport(MetadataServiceTransport):
     def list_entities(
         self,
     ) -> Callable[
-        [metadata_.ListEntitiesRequest], Awaitable[metadata_.ListEntitiesResponse]
+        [metadata.ListEntitiesRequest], Awaitable[metadata.ListEntitiesResponse]
     ]:
         r"""Return a callable for the list entities method over gRPC.
 
@@ -280,15 +280,15 @@ class MetadataServiceGrpcAsyncIOTransport(MetadataServiceTransport):
         if "list_entities" not in self._stubs:
             self._stubs["list_entities"] = self.grpc_channel.unary_unary(
                 "/google.cloud.dataplex.v1.MetadataService/ListEntities",
-                request_serializer=metadata_.ListEntitiesRequest.serialize,
-                response_deserializer=metadata_.ListEntitiesResponse.deserialize,
+                request_serializer=metadata.ListEntitiesRequest.serialize,
+                response_deserializer=metadata.ListEntitiesResponse.deserialize,
             )
         return self._stubs["list_entities"]
 
     @property
     def get_partition(
         self,
-    ) -> Callable[[metadata_.GetPartitionRequest], Awaitable[metadata_.Partition]]:
+    ) -> Callable[[metadata.GetPartitionRequest], Awaitable[metadata.Partition]]:
         r"""Return a callable for the get partition method over gRPC.
 
         Get a metadata partition of an entity.
@@ -306,8 +306,8 @@ class MetadataServiceGrpcAsyncIOTransport(MetadataServiceTransport):
         if "get_partition" not in self._stubs:
             self._stubs["get_partition"] = self.grpc_channel.unary_unary(
                 "/google.cloud.dataplex.v1.MetadataService/GetPartition",
-                request_serializer=metadata_.GetPartitionRequest.serialize,
-                response_deserializer=metadata_.Partition.deserialize,
+                request_serializer=metadata.GetPartitionRequest.serialize,
+                response_deserializer=metadata.Partition.deserialize,
             )
         return self._stubs["get_partition"]
 
@@ -315,7 +315,7 @@ class MetadataServiceGrpcAsyncIOTransport(MetadataServiceTransport):
     def list_partitions(
         self,
     ) -> Callable[
-        [metadata_.ListPartitionsRequest], Awaitable[metadata_.ListPartitionsResponse]
+        [metadata.ListPartitionsRequest], Awaitable[metadata.ListPartitionsResponse]
     ]:
         r"""Return a callable for the list partitions method over gRPC.
 
@@ -334,8 +334,8 @@ class MetadataServiceGrpcAsyncIOTransport(MetadataServiceTransport):
         if "list_partitions" not in self._stubs:
             self._stubs["list_partitions"] = self.grpc_channel.unary_unary(
                 "/google.cloud.dataplex.v1.MetadataService/ListPartitions",
-                request_serializer=metadata_.ListPartitionsRequest.serialize,
-                response_deserializer=metadata_.ListPartitionsResponse.deserialize,
+                request_serializer=metadata.ListPartitionsRequest.serialize,
+                response_deserializer=metadata.ListPartitionsResponse.deserialize,
             )
         return self._stubs["list_partitions"]
 

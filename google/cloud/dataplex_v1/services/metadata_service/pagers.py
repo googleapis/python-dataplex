@@ -24,7 +24,7 @@ from typing import (
     Iterator,
 )
 
-from google.cloud.dataplex_v1.types import metadata_
+from google.cloud.dataplex_v1.types import metadata
 
 
 class ListEntitiesPager:
@@ -47,9 +47,9 @@ class ListEntitiesPager:
 
     def __init__(
         self,
-        method: Callable[..., metadata_.ListEntitiesResponse],
-        request: metadata_.ListEntitiesRequest,
-        response: metadata_.ListEntitiesResponse,
+        method: Callable[..., metadata.ListEntitiesResponse],
+        request: metadata.ListEntitiesRequest,
+        response: metadata.ListEntitiesResponse,
         *,
         metadata: Sequence[Tuple[str, str]] = ()
     ):
@@ -66,7 +66,7 @@ class ListEntitiesPager:
                 sent along with the request as metadata.
         """
         self._method = method
-        self._request = metadata_.ListEntitiesRequest(request)
+        self._request = metadata.ListEntitiesRequest(request)
         self._response = response
         self._metadata = metadata
 
@@ -74,14 +74,14 @@ class ListEntitiesPager:
         return getattr(self._response, name)
 
     @property
-    def pages(self) -> Iterator[metadata_.ListEntitiesResponse]:
+    def pages(self) -> Iterator[metadata.ListEntitiesResponse]:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
             self._response = self._method(self._request, metadata=self._metadata)
             yield self._response
 
-    def __iter__(self) -> Iterator[metadata_.Entity]:
+    def __iter__(self) -> Iterator[metadata.Entity]:
         for page in self.pages:
             yield from page.entities
 
@@ -109,9 +109,9 @@ class ListEntitiesAsyncPager:
 
     def __init__(
         self,
-        method: Callable[..., Awaitable[metadata_.ListEntitiesResponse]],
-        request: metadata_.ListEntitiesRequest,
-        response: metadata_.ListEntitiesResponse,
+        method: Callable[..., Awaitable[metadata.ListEntitiesResponse]],
+        request: metadata.ListEntitiesRequest,
+        response: metadata.ListEntitiesResponse,
         *,
         metadata: Sequence[Tuple[str, str]] = ()
     ):
@@ -128,7 +128,7 @@ class ListEntitiesAsyncPager:
                 sent along with the request as metadata.
         """
         self._method = method
-        self._request = metadata_.ListEntitiesRequest(request)
+        self._request = metadata.ListEntitiesRequest(request)
         self._response = response
         self._metadata = metadata
 
@@ -136,14 +136,14 @@ class ListEntitiesAsyncPager:
         return getattr(self._response, name)
 
     @property
-    async def pages(self) -> AsyncIterator[metadata_.ListEntitiesResponse]:
+    async def pages(self) -> AsyncIterator[metadata.ListEntitiesResponse]:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
             self._response = await self._method(self._request, metadata=self._metadata)
             yield self._response
 
-    def __aiter__(self) -> AsyncIterator[metadata_.Entity]:
+    def __aiter__(self) -> AsyncIterator[metadata.Entity]:
         async def async_generator():
             async for page in self.pages:
                 for response in page.entities:
@@ -175,9 +175,9 @@ class ListPartitionsPager:
 
     def __init__(
         self,
-        method: Callable[..., metadata_.ListPartitionsResponse],
-        request: metadata_.ListPartitionsRequest,
-        response: metadata_.ListPartitionsResponse,
+        method: Callable[..., metadata.ListPartitionsResponse],
+        request: metadata.ListPartitionsRequest,
+        response: metadata.ListPartitionsResponse,
         *,
         metadata: Sequence[Tuple[str, str]] = ()
     ):
@@ -194,7 +194,7 @@ class ListPartitionsPager:
                 sent along with the request as metadata.
         """
         self._method = method
-        self._request = metadata_.ListPartitionsRequest(request)
+        self._request = metadata.ListPartitionsRequest(request)
         self._response = response
         self._metadata = metadata
 
@@ -202,14 +202,14 @@ class ListPartitionsPager:
         return getattr(self._response, name)
 
     @property
-    def pages(self) -> Iterator[metadata_.ListPartitionsResponse]:
+    def pages(self) -> Iterator[metadata.ListPartitionsResponse]:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
             self._response = self._method(self._request, metadata=self._metadata)
             yield self._response
 
-    def __iter__(self) -> Iterator[metadata_.Partition]:
+    def __iter__(self) -> Iterator[metadata.Partition]:
         for page in self.pages:
             yield from page.partitions
 
@@ -237,9 +237,9 @@ class ListPartitionsAsyncPager:
 
     def __init__(
         self,
-        method: Callable[..., Awaitable[metadata_.ListPartitionsResponse]],
-        request: metadata_.ListPartitionsRequest,
-        response: metadata_.ListPartitionsResponse,
+        method: Callable[..., Awaitable[metadata.ListPartitionsResponse]],
+        request: metadata.ListPartitionsRequest,
+        response: metadata.ListPartitionsResponse,
         *,
         metadata: Sequence[Tuple[str, str]] = ()
     ):
@@ -256,7 +256,7 @@ class ListPartitionsAsyncPager:
                 sent along with the request as metadata.
         """
         self._method = method
-        self._request = metadata_.ListPartitionsRequest(request)
+        self._request = metadata.ListPartitionsRequest(request)
         self._response = response
         self._metadata = metadata
 
@@ -264,14 +264,14 @@ class ListPartitionsAsyncPager:
         return getattr(self._response, name)
 
     @property
-    async def pages(self) -> AsyncIterator[metadata_.ListPartitionsResponse]:
+    async def pages(self) -> AsyncIterator[metadata.ListPartitionsResponse]:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
             self._response = await self._method(self._request, metadata=self._metadata)
             yield self._response
 
-    def __aiter__(self) -> AsyncIterator[metadata_.Partition]:
+    def __aiter__(self) -> AsyncIterator[metadata.Partition]:
         async def async_generator():
             async for page in self.pages:
                 for response in page.partitions:
