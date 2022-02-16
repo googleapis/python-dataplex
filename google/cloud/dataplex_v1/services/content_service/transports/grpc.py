@@ -24,16 +24,17 @@ from google.auth.transport.grpc import SslCredentials  # type: ignore
 
 import grpc  # type: ignore
 
-from google.cloud.dataplex_v1.types import metadata_
+from google.cloud.dataplex_v1.types import analyze
+from google.cloud.dataplex_v1.types import content
+from google.cloud.dataplex_v1.types import content as gcd_content
 from google.protobuf import empty_pb2  # type: ignore
-from .base import MetadataServiceTransport, DEFAULT_CLIENT_INFO
+from .base import ContentServiceTransport, DEFAULT_CLIENT_INFO
 
 
-class MetadataServiceGrpcTransport(MetadataServiceTransport):
-    """gRPC backend transport for MetadataService.
+class ContentServiceGrpcTransport(ContentServiceTransport):
+    """gRPC backend transport for ContentService.
 
-    Metadata service manages metadata resources such as tables,
-    filesets and partitions.
+    ContentService manages Notebook and SQL Scripts for Dataplex.
 
     This class defines the same methods as the primary client, so the
     primary client can load the underlying transport implementation
@@ -231,16 +232,16 @@ class MetadataServiceGrpcTransport(MetadataServiceTransport):
         return self._grpc_channel
 
     @property
-    def create_entity(
+    def create_content(
         self,
-    ) -> Callable[[metadata_.CreateEntityRequest], metadata_.Entity]:
-        r"""Return a callable for the create entity method over gRPC.
+    ) -> Callable[[gcd_content.CreateContentRequest], analyze.Content]:
+        r"""Return a callable for the create content method over gRPC.
 
-        Create a metadata entity.
+        Create a content.
 
         Returns:
-            Callable[[~.CreateEntityRequest],
-                    ~.Entity]:
+            Callable[[~.CreateContentRequest],
+                    ~.Content]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -248,26 +249,25 @@ class MetadataServiceGrpcTransport(MetadataServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "create_entity" not in self._stubs:
-            self._stubs["create_entity"] = self.grpc_channel.unary_unary(
-                "/google.cloud.dataplex.v1.MetadataService/CreateEntity",
-                request_serializer=metadata_.CreateEntityRequest.serialize,
-                response_deserializer=metadata_.Entity.deserialize,
+        if "create_content" not in self._stubs:
+            self._stubs["create_content"] = self.grpc_channel.unary_unary(
+                "/google.cloud.dataplex.v1.ContentService/CreateContent",
+                request_serializer=gcd_content.CreateContentRequest.serialize,
+                response_deserializer=analyze.Content.deserialize,
             )
-        return self._stubs["create_entity"]
+        return self._stubs["create_content"]
 
     @property
-    def update_entity(
+    def update_content(
         self,
-    ) -> Callable[[metadata_.UpdateEntityRequest], metadata_.Entity]:
-        r"""Return a callable for the update entity method over gRPC.
+    ) -> Callable[[gcd_content.UpdateContentRequest], analyze.Content]:
+        r"""Return a callable for the update content method over gRPC.
 
-        Update a metadata entity. Only supports full resource
-        update.
+        Update a content. Only supports full resource update.
 
         Returns:
-            Callable[[~.UpdateEntityRequest],
-                    ~.Entity]:
+            Callable[[~.UpdateContentRequest],
+                    ~.Content]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -275,24 +275,24 @@ class MetadataServiceGrpcTransport(MetadataServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "update_entity" not in self._stubs:
-            self._stubs["update_entity"] = self.grpc_channel.unary_unary(
-                "/google.cloud.dataplex.v1.MetadataService/UpdateEntity",
-                request_serializer=metadata_.UpdateEntityRequest.serialize,
-                response_deserializer=metadata_.Entity.deserialize,
+        if "update_content" not in self._stubs:
+            self._stubs["update_content"] = self.grpc_channel.unary_unary(
+                "/google.cloud.dataplex.v1.ContentService/UpdateContent",
+                request_serializer=gcd_content.UpdateContentRequest.serialize,
+                response_deserializer=analyze.Content.deserialize,
             )
-        return self._stubs["update_entity"]
+        return self._stubs["update_content"]
 
     @property
-    def delete_entity(
+    def delete_content(
         self,
-    ) -> Callable[[metadata_.DeleteEntityRequest], empty_pb2.Empty]:
-        r"""Return a callable for the delete entity method over gRPC.
+    ) -> Callable[[content.DeleteContentRequest], empty_pb2.Empty]:
+        r"""Return a callable for the delete content method over gRPC.
 
-        Delete a metadata entity.
+        Delete a content.
 
         Returns:
-            Callable[[~.DeleteEntityRequest],
+            Callable[[~.DeleteContentRequest],
                     ~.Empty]:
                 A function that, when called, will call the underlying RPC
                 on the server.
@@ -301,23 +301,23 @@ class MetadataServiceGrpcTransport(MetadataServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "delete_entity" not in self._stubs:
-            self._stubs["delete_entity"] = self.grpc_channel.unary_unary(
-                "/google.cloud.dataplex.v1.MetadataService/DeleteEntity",
-                request_serializer=metadata_.DeleteEntityRequest.serialize,
+        if "delete_content" not in self._stubs:
+            self._stubs["delete_content"] = self.grpc_channel.unary_unary(
+                "/google.cloud.dataplex.v1.ContentService/DeleteContent",
+                request_serializer=content.DeleteContentRequest.serialize,
                 response_deserializer=empty_pb2.Empty.FromString,
             )
-        return self._stubs["delete_entity"]
+        return self._stubs["delete_content"]
 
     @property
-    def get_entity(self) -> Callable[[metadata_.GetEntityRequest], metadata_.Entity]:
-        r"""Return a callable for the get entity method over gRPC.
+    def get_content(self) -> Callable[[content.GetContentRequest], analyze.Content]:
+        r"""Return a callable for the get content method over gRPC.
 
-        Get a metadata entity.
+        Get a content resource.
 
         Returns:
-            Callable[[~.GetEntityRequest],
-                    ~.Entity]:
+            Callable[[~.GetContentRequest],
+                    ~.Content]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -325,25 +325,25 @@ class MetadataServiceGrpcTransport(MetadataServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "get_entity" not in self._stubs:
-            self._stubs["get_entity"] = self.grpc_channel.unary_unary(
-                "/google.cloud.dataplex.v1.MetadataService/GetEntity",
-                request_serializer=metadata_.GetEntityRequest.serialize,
-                response_deserializer=metadata_.Entity.deserialize,
+        if "get_content" not in self._stubs:
+            self._stubs["get_content"] = self.grpc_channel.unary_unary(
+                "/google.cloud.dataplex.v1.ContentService/GetContent",
+                request_serializer=content.GetContentRequest.serialize,
+                response_deserializer=analyze.Content.deserialize,
             )
-        return self._stubs["get_entity"]
+        return self._stubs["get_content"]
 
     @property
-    def list_entities(
+    def list_content(
         self,
-    ) -> Callable[[metadata_.ListEntitiesRequest], metadata_.ListEntitiesResponse]:
-        r"""Return a callable for the list entities method over gRPC.
+    ) -> Callable[[content.ListContentRequest], content.ListContentResponse]:
+        r"""Return a callable for the list content method over gRPC.
 
-        List metadata entities in a zone.
+        List content.
 
         Returns:
-            Callable[[~.ListEntitiesRequest],
-                    ~.ListEntitiesResponse]:
+            Callable[[~.ListContentRequest],
+                    ~.ListContentResponse]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -351,120 +351,16 @@ class MetadataServiceGrpcTransport(MetadataServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "list_entities" not in self._stubs:
-            self._stubs["list_entities"] = self.grpc_channel.unary_unary(
-                "/google.cloud.dataplex.v1.MetadataService/ListEntities",
-                request_serializer=metadata_.ListEntitiesRequest.serialize,
-                response_deserializer=metadata_.ListEntitiesResponse.deserialize,
+        if "list_content" not in self._stubs:
+            self._stubs["list_content"] = self.grpc_channel.unary_unary(
+                "/google.cloud.dataplex.v1.ContentService/ListContent",
+                request_serializer=content.ListContentRequest.serialize,
+                response_deserializer=content.ListContentResponse.deserialize,
             )
-        return self._stubs["list_entities"]
-
-    @property
-    def create_partition(
-        self,
-    ) -> Callable[[metadata_.CreatePartitionRequest], metadata_.Partition]:
-        r"""Return a callable for the create partition method over gRPC.
-
-        Create a metadata partition.
-
-        Returns:
-            Callable[[~.CreatePartitionRequest],
-                    ~.Partition]:
-                A function that, when called, will call the underlying RPC
-                on the server.
-        """
-        # Generate a "stub function" on-the-fly which will actually make
-        # the request.
-        # gRPC handles serialization and deserialization, so we just need
-        # to pass in the functions for each.
-        if "create_partition" not in self._stubs:
-            self._stubs["create_partition"] = self.grpc_channel.unary_unary(
-                "/google.cloud.dataplex.v1.MetadataService/CreatePartition",
-                request_serializer=metadata_.CreatePartitionRequest.serialize,
-                response_deserializer=metadata_.Partition.deserialize,
-            )
-        return self._stubs["create_partition"]
-
-    @property
-    def delete_partition(
-        self,
-    ) -> Callable[[metadata_.DeletePartitionRequest], empty_pb2.Empty]:
-        r"""Return a callable for the delete partition method over gRPC.
-
-        Delete a metadata partition.
-
-        Returns:
-            Callable[[~.DeletePartitionRequest],
-                    ~.Empty]:
-                A function that, when called, will call the underlying RPC
-                on the server.
-        """
-        # Generate a "stub function" on-the-fly which will actually make
-        # the request.
-        # gRPC handles serialization and deserialization, so we just need
-        # to pass in the functions for each.
-        if "delete_partition" not in self._stubs:
-            self._stubs["delete_partition"] = self.grpc_channel.unary_unary(
-                "/google.cloud.dataplex.v1.MetadataService/DeletePartition",
-                request_serializer=metadata_.DeletePartitionRequest.serialize,
-                response_deserializer=empty_pb2.Empty.FromString,
-            )
-        return self._stubs["delete_partition"]
-
-    @property
-    def get_partition(
-        self,
-    ) -> Callable[[metadata_.GetPartitionRequest], metadata_.Partition]:
-        r"""Return a callable for the get partition method over gRPC.
-
-        Get a metadata partition of an entity.
-
-        Returns:
-            Callable[[~.GetPartitionRequest],
-                    ~.Partition]:
-                A function that, when called, will call the underlying RPC
-                on the server.
-        """
-        # Generate a "stub function" on-the-fly which will actually make
-        # the request.
-        # gRPC handles serialization and deserialization, so we just need
-        # to pass in the functions for each.
-        if "get_partition" not in self._stubs:
-            self._stubs["get_partition"] = self.grpc_channel.unary_unary(
-                "/google.cloud.dataplex.v1.MetadataService/GetPartition",
-                request_serializer=metadata_.GetPartitionRequest.serialize,
-                response_deserializer=metadata_.Partition.deserialize,
-            )
-        return self._stubs["get_partition"]
-
-    @property
-    def list_partitions(
-        self,
-    ) -> Callable[[metadata_.ListPartitionsRequest], metadata_.ListPartitionsResponse]:
-        r"""Return a callable for the list partitions method over gRPC.
-
-        List metadata partitions of an entity.
-
-        Returns:
-            Callable[[~.ListPartitionsRequest],
-                    ~.ListPartitionsResponse]:
-                A function that, when called, will call the underlying RPC
-                on the server.
-        """
-        # Generate a "stub function" on-the-fly which will actually make
-        # the request.
-        # gRPC handles serialization and deserialization, so we just need
-        # to pass in the functions for each.
-        if "list_partitions" not in self._stubs:
-            self._stubs["list_partitions"] = self.grpc_channel.unary_unary(
-                "/google.cloud.dataplex.v1.MetadataService/ListPartitions",
-                request_serializer=metadata_.ListPartitionsRequest.serialize,
-                response_deserializer=metadata_.ListPartitionsResponse.deserialize,
-            )
-        return self._stubs["list_partitions"]
+        return self._stubs["list_content"]
 
     def close(self):
         self.grpc_channel.close()
 
 
-__all__ = ("MetadataServiceGrpcTransport",)
+__all__ = ("ContentServiceGrpcTransport",)

@@ -25,7 +25,9 @@ from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 
-from google.cloud.dataplex_v1.types import metadata_
+from google.cloud.dataplex_v1.types import analyze
+from google.cloud.dataplex_v1.types import content
+from google.cloud.dataplex_v1.types import content as gcd_content
 from google.protobuf import empty_pb2  # type: ignore
 
 try:
@@ -36,8 +38,8 @@ except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
 
 
-class MetadataServiceTransport(abc.ABC):
-    """Abstract transport class for MetadataService."""
+class ContentServiceTransport(abc.ABC):
+    """Abstract transport class for ContentService."""
 
     AUTH_SCOPES = ("https://www.googleapis.com/auth/cloud-platform",)
 
@@ -119,76 +121,20 @@ class MetadataServiceTransport(abc.ABC):
     def _prep_wrapped_messages(self, client_info):
         # Precompute the wrapped methods.
         self._wrapped_methods = {
-            self.create_entity: gapic_v1.method.wrap_method(
-                self.create_entity, default_timeout=60.0, client_info=client_info,
+            self.create_content: gapic_v1.method.wrap_method(
+                self.create_content, default_timeout=None, client_info=client_info,
             ),
-            self.update_entity: gapic_v1.method.wrap_method(
-                self.update_entity, default_timeout=60.0, client_info=client_info,
+            self.update_content: gapic_v1.method.wrap_method(
+                self.update_content, default_timeout=None, client_info=client_info,
             ),
-            self.delete_entity: gapic_v1.method.wrap_method(
-                self.delete_entity, default_timeout=60.0, client_info=client_info,
+            self.delete_content: gapic_v1.method.wrap_method(
+                self.delete_content, default_timeout=None, client_info=client_info,
             ),
-            self.get_entity: gapic_v1.method.wrap_method(
-                self.get_entity,
-                default_retry=retries.Retry(
-                    initial=1.0,
-                    maximum=10.0,
-                    multiplier=1.3,
-                    predicate=retries.if_exception_type(
-                        core_exceptions.ServiceUnavailable,
-                    ),
-                    deadline=60.0,
-                ),
-                default_timeout=60.0,
-                client_info=client_info,
+            self.get_content: gapic_v1.method.wrap_method(
+                self.get_content, default_timeout=None, client_info=client_info,
             ),
-            self.list_entities: gapic_v1.method.wrap_method(
-                self.list_entities,
-                default_retry=retries.Retry(
-                    initial=1.0,
-                    maximum=10.0,
-                    multiplier=1.3,
-                    predicate=retries.if_exception_type(
-                        core_exceptions.ServiceUnavailable,
-                    ),
-                    deadline=60.0,
-                ),
-                default_timeout=60.0,
-                client_info=client_info,
-            ),
-            self.create_partition: gapic_v1.method.wrap_method(
-                self.create_partition, default_timeout=60.0, client_info=client_info,
-            ),
-            self.delete_partition: gapic_v1.method.wrap_method(
-                self.delete_partition, default_timeout=60.0, client_info=client_info,
-            ),
-            self.get_partition: gapic_v1.method.wrap_method(
-                self.get_partition,
-                default_retry=retries.Retry(
-                    initial=1.0,
-                    maximum=10.0,
-                    multiplier=1.3,
-                    predicate=retries.if_exception_type(
-                        core_exceptions.ServiceUnavailable,
-                    ),
-                    deadline=60.0,
-                ),
-                default_timeout=60.0,
-                client_info=client_info,
-            ),
-            self.list_partitions: gapic_v1.method.wrap_method(
-                self.list_partitions,
-                default_retry=retries.Retry(
-                    initial=1.0,
-                    maximum=10.0,
-                    multiplier=1.3,
-                    predicate=retries.if_exception_type(
-                        core_exceptions.ServiceUnavailable,
-                    ),
-                    deadline=60.0,
-                ),
-                default_timeout=60.0,
-                client_info=client_info,
+            self.list_content: gapic_v1.method.wrap_method(
+                self.list_content, default_timeout=None, client_info=client_info,
             ),
         }
 
@@ -202,90 +148,48 @@ class MetadataServiceTransport(abc.ABC):
         raise NotImplementedError()
 
     @property
-    def create_entity(
+    def create_content(
         self,
     ) -> Callable[
-        [metadata_.CreateEntityRequest],
-        Union[metadata_.Entity, Awaitable[metadata_.Entity]],
+        [gcd_content.CreateContentRequest],
+        Union[analyze.Content, Awaitable[analyze.Content]],
     ]:
         raise NotImplementedError()
 
     @property
-    def update_entity(
+    def update_content(
         self,
     ) -> Callable[
-        [metadata_.UpdateEntityRequest],
-        Union[metadata_.Entity, Awaitable[metadata_.Entity]],
+        [gcd_content.UpdateContentRequest],
+        Union[analyze.Content, Awaitable[analyze.Content]],
     ]:
         raise NotImplementedError()
 
     @property
-    def delete_entity(
+    def delete_content(
         self,
     ) -> Callable[
-        [metadata_.DeleteEntityRequest],
+        [content.DeleteContentRequest],
         Union[empty_pb2.Empty, Awaitable[empty_pb2.Empty]],
     ]:
         raise NotImplementedError()
 
     @property
-    def get_entity(
+    def get_content(
         self,
     ) -> Callable[
-        [metadata_.GetEntityRequest],
-        Union[metadata_.Entity, Awaitable[metadata_.Entity]],
+        [content.GetContentRequest], Union[analyze.Content, Awaitable[analyze.Content]]
     ]:
         raise NotImplementedError()
 
     @property
-    def list_entities(
+    def list_content(
         self,
     ) -> Callable[
-        [metadata_.ListEntitiesRequest],
-        Union[
-            metadata_.ListEntitiesResponse, Awaitable[metadata_.ListEntitiesResponse]
-        ],
-    ]:
-        raise NotImplementedError()
-
-    @property
-    def create_partition(
-        self,
-    ) -> Callable[
-        [metadata_.CreatePartitionRequest],
-        Union[metadata_.Partition, Awaitable[metadata_.Partition]],
-    ]:
-        raise NotImplementedError()
-
-    @property
-    def delete_partition(
-        self,
-    ) -> Callable[
-        [metadata_.DeletePartitionRequest],
-        Union[empty_pb2.Empty, Awaitable[empty_pb2.Empty]],
-    ]:
-        raise NotImplementedError()
-
-    @property
-    def get_partition(
-        self,
-    ) -> Callable[
-        [metadata_.GetPartitionRequest],
-        Union[metadata_.Partition, Awaitable[metadata_.Partition]],
-    ]:
-        raise NotImplementedError()
-
-    @property
-    def list_partitions(
-        self,
-    ) -> Callable[
-        [metadata_.ListPartitionsRequest],
-        Union[
-            metadata_.ListPartitionsResponse,
-            Awaitable[metadata_.ListPartitionsResponse],
-        ],
+        [content.ListContentRequest],
+        Union[content.ListContentResponse, Awaitable[content.ListContentResponse]],
     ]:
         raise NotImplementedError()
 
 
-__all__ = ("MetadataServiceTransport",)
+__all__ = ("ContentServiceTransport",)

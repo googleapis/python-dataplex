@@ -34,16 +34,19 @@ try:
 except AttributeError:  # pragma: NO COVER
     OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
-from google.cloud.dataplex_v1.services.metadata_service import pagers
-from google.cloud.dataplex_v1.types import metadata_
+from google.cloud.dataplex_v1.services.content_service import pagers
+from google.cloud.dataplex_v1.types import analyze
+from google.cloud.dataplex_v1.types import content
+from google.cloud.dataplex_v1.types import content as gcd_content
+from google.protobuf import field_mask_pb2  # type: ignore
 from google.protobuf import timestamp_pb2  # type: ignore
-from .transports.base import MetadataServiceTransport, DEFAULT_CLIENT_INFO
-from .transports.grpc import MetadataServiceGrpcTransport
-from .transports.grpc_asyncio import MetadataServiceGrpcAsyncIOTransport
+from .transports.base import ContentServiceTransport, DEFAULT_CLIENT_INFO
+from .transports.grpc import ContentServiceGrpcTransport
+from .transports.grpc_asyncio import ContentServiceGrpcAsyncIOTransport
 
 
-class MetadataServiceClientMeta(type):
-    """Metaclass for the MetadataService client.
+class ContentServiceClientMeta(type):
+    """Metaclass for the ContentService client.
 
     This provides class-level methods for building and retrieving
     support objects (e.g. transport) without polluting the client instance
@@ -52,11 +55,11 @@ class MetadataServiceClientMeta(type):
 
     _transport_registry = (
         OrderedDict()
-    )  # type: Dict[str, Type[MetadataServiceTransport]]
-    _transport_registry["grpc"] = MetadataServiceGrpcTransport
-    _transport_registry["grpc_asyncio"] = MetadataServiceGrpcAsyncIOTransport
+    )  # type: Dict[str, Type[ContentServiceTransport]]
+    _transport_registry["grpc"] = ContentServiceGrpcTransport
+    _transport_registry["grpc_asyncio"] = ContentServiceGrpcAsyncIOTransport
 
-    def get_transport_class(cls, label: str = None,) -> Type[MetadataServiceTransport]:
+    def get_transport_class(cls, label: str = None,) -> Type[ContentServiceTransport]:
         """Returns an appropriate transport class.
 
         Args:
@@ -75,10 +78,8 @@ class MetadataServiceClientMeta(type):
         return next(iter(cls._transport_registry.values()))
 
 
-class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
-    """Metadata service manages metadata resources such as tables,
-    filesets and partitions.
-    """
+class ContentServiceClient(metaclass=ContentServiceClientMeta):
+    """ContentService manages Notebook and SQL Scripts for Dataplex."""
 
     @staticmethod
     def _get_default_mtls_endpoint(api_endpoint):
@@ -126,7 +127,7 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
             kwargs: Additional arguments to pass to the constructor.
 
         Returns:
-            MetadataServiceClient: The constructed client.
+            ContentServiceClient: The constructed client.
         """
         credentials = service_account.Credentials.from_service_account_info(info)
         kwargs["credentials"] = credentials
@@ -144,7 +145,7 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
             kwargs: Additional arguments to pass to the constructor.
 
         Returns:
-            MetadataServiceClient: The constructed client.
+            ContentServiceClient: The constructed client.
         """
         credentials = service_account.Credentials.from_service_account_file(filename)
         kwargs["credentials"] = credentials
@@ -153,68 +154,43 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
     from_service_account_json = from_service_account_file
 
     @property
-    def transport(self) -> MetadataServiceTransport:
+    def transport(self) -> ContentServiceTransport:
         """Returns the transport used by the client instance.
 
         Returns:
-            MetadataServiceTransport: The transport used by the client
+            ContentServiceTransport: The transport used by the client
                 instance.
         """
         return self._transport
 
     @staticmethod
-    def entity_path(
-        project: str, location: str, lake: str, zone: str, entity: str,
-    ) -> str:
-        """Returns a fully-qualified entity string."""
-        return "projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}".format(
-            project=project, location=location, lake=lake, zone=zone, entity=entity,
+    def content_path(project: str, location: str, lake: str, content: str,) -> str:
+        """Returns a fully-qualified content string."""
+        return "projects/{project}/locations/{location}/lakes/{lake}/content/{content}".format(
+            project=project, location=location, lake=lake, content=content,
         )
 
     @staticmethod
-    def parse_entity_path(path: str) -> Dict[str, str]:
-        """Parses a entity path into its component segments."""
+    def parse_content_path(path: str) -> Dict[str, str]:
+        """Parses a content path into its component segments."""
         m = re.match(
-            r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/lakes/(?P<lake>.+?)/zones/(?P<zone>.+?)/entities/(?P<entity>.+?)$",
+            r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/lakes/(?P<lake>.+?)/content/(?P<content>.+?)$",
             path,
         )
         return m.groupdict() if m else {}
 
     @staticmethod
-    def partition_path(
-        project: str, location: str, lake: str, zone: str, entity: str, partition: str,
-    ) -> str:
-        """Returns a fully-qualified partition string."""
-        return "projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}/partitions/{partition}".format(
-            project=project,
-            location=location,
-            lake=lake,
-            zone=zone,
-            entity=entity,
-            partition=partition,
+    def lake_path(project: str, location: str, lake: str,) -> str:
+        """Returns a fully-qualified lake string."""
+        return "projects/{project}/locations/{location}/lakes/{lake}".format(
+            project=project, location=location, lake=lake,
         )
 
     @staticmethod
-    def parse_partition_path(path: str) -> Dict[str, str]:
-        """Parses a partition path into its component segments."""
+    def parse_lake_path(path: str) -> Dict[str, str]:
+        """Parses a lake path into its component segments."""
         m = re.match(
-            r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/lakes/(?P<lake>.+?)/zones/(?P<zone>.+?)/entities/(?P<entity>.+?)/partitions/(?P<partition>.+?)$",
-            path,
-        )
-        return m.groupdict() if m else {}
-
-    @staticmethod
-    def zone_path(project: str, location: str, lake: str, zone: str,) -> str:
-        """Returns a fully-qualified zone string."""
-        return "projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}".format(
-            project=project, location=location, lake=lake, zone=zone,
-        )
-
-    @staticmethod
-    def parse_zone_path(path: str) -> Dict[str, str]:
-        """Parses a zone path into its component segments."""
-        m = re.match(
-            r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/lakes/(?P<lake>.+?)/zones/(?P<zone>.+?)$",
+            r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/lakes/(?P<lake>.+?)$",
             path,
         )
         return m.groupdict() if m else {}
@@ -349,11 +325,11 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, MetadataServiceTransport, None] = None,
+        transport: Union[str, ContentServiceTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
-        """Instantiates the metadata service client.
+        """Instantiates the content service client.
 
         Args:
             credentials (Optional[google.auth.credentials.Credentials]): The
@@ -361,7 +337,7 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
                 credentials identify the application to the service; if none
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
-            transport (Union[str, MetadataServiceTransport]): The
+            transport (Union[str, ContentServiceTransport]): The
                 transport to use. If set to None, a transport is chosen
                 automatically.
             client_options (google.api_core.client_options.ClientOptions): Custom options for the
@@ -408,8 +384,8 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
         # Save or instantiate the transport.
         # Ordinarily, we provide the transport, but allowing a custom transport
         # instance provides an extensibility point for unusual situations.
-        if isinstance(transport, MetadataServiceTransport):
-            # transport is a MetadataServiceTransport instance.
+        if isinstance(transport, ContentServiceTransport):
+            # transport is a ContentServiceTransport instance.
             if credentials or client_options.credentials_file or api_key_value:
                 raise ValueError(
                     "When providing a transport instance, "
@@ -443,61 +419,57 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
                 always_use_jwt_access=True,
             )
 
-    def create_entity(
+    def create_content(
         self,
-        request: Union[metadata_.CreateEntityRequest, dict] = None,
+        request: Union[gcd_content.CreateContentRequest, dict] = None,
         *,
         parent: str = None,
-        entity: metadata_.Entity = None,
+        content: analyze.Content = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> metadata_.Entity:
-        r"""Create a metadata entity.
+    ) -> analyze.Content:
+        r"""Create a content.
 
 
         .. code-block::
 
             from google.cloud import dataplex_v1
 
-            def sample_create_entity():
+            def sample_create_content():
                 # Create a client
-                client = dataplex_v1.MetadataServiceClient()
+                client = dataplex_v1.ContentServiceClient()
 
                 # Initialize request argument(s)
-                entity = dataplex_v1.Entity()
-                entity.id = "id_value"
-                entity.type_ = "FILESET"
-                entity.asset = "asset_value"
-                entity.data_path = "data_path_value"
-                entity.system = "BIGQUERY"
-                entity.format_.mime_type = "mime_type_value"
-                entity.schema.user_managed = True
+                content = dataplex_v1.Content()
+                content.data_text = "data_text_value"
+                content.sql_script.engine = "SPARK"
+                content.path = "path_value"
 
-                request = dataplex_v1.CreateEntityRequest(
+                request = dataplex_v1.CreateContentRequest(
                     parent="parent_value",
-                    entity=entity,
+                    content=content,
                 )
 
                 # Make the request
-                response = client.create_entity(request=request)
+                response = client.create_content(request=request)
 
                 # Handle the response
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataplex_v1.types.CreateEntityRequest, dict]):
-                The request object. Create a metadata entity request.
+            request (Union[google.cloud.dataplex_v1.types.CreateContentRequest, dict]):
+                The request object. Create content request.
             parent (str):
-                Required. The resource name of the parent zone:
-                ``projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}``.
+                Required. The resource name of the parent lake:
+                projects/{project_id}/locations/{location_id}/lakes/{lake_id}
 
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            entity (google.cloud.dataplex_v1.types.Entity):
-                Required. Entity resource.
-                This corresponds to the ``entity`` field
+            content (google.cloud.dataplex_v1.types.Content):
+                Required. Content resource.
+                This corresponds to the ``content`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
@@ -507,15 +479,15 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.dataplex_v1.types.Entity:
-                Represents tables and fileset
-                metadata contained within a zone.
+            google.cloud.dataplex_v1.types.Content:
+                Content represents a user-visible
+                notebook or a sql script
 
         """
         # Create or coerce a protobuf request object.
         # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([parent, entity])
+        has_flattened_params = any([parent, content])
         if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
@@ -523,21 +495,21 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
             )
 
         # Minor optimization to avoid making a copy if the user passes
-        # in a metadata_.CreateEntityRequest.
+        # in a gcd_content.CreateContentRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, metadata_.CreateEntityRequest):
-            request = metadata_.CreateEntityRequest(request)
+        if not isinstance(request, gcd_content.CreateContentRequest):
+            request = gcd_content.CreateContentRequest(request)
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
             if parent is not None:
                 request.parent = parent
-            if entity is not None:
-                request.entity = entity
+            if content is not None:
+                request.content = content
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.create_entity]
+        rpc = self._transport._wrapped_methods[self._transport.create_content]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -551,54 +523,58 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
         # Done; return the response.
         return response
 
-    def update_entity(
+    def update_content(
         self,
-        request: Union[metadata_.UpdateEntityRequest, dict] = None,
+        request: Union[gcd_content.UpdateContentRequest, dict] = None,
         *,
+        content: analyze.Content = None,
+        update_mask: field_mask_pb2.FieldMask = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> metadata_.Entity:
-        r"""Update a metadata entity. Only supports full resource
-        update.
-
+    ) -> analyze.Content:
+        r"""Update a content. Only supports full resource update.
 
 
         .. code-block::
 
             from google.cloud import dataplex_v1
 
-            def sample_update_entity():
+            def sample_update_content():
                 # Create a client
-                client = dataplex_v1.MetadataServiceClient()
+                client = dataplex_v1.ContentServiceClient()
 
                 # Initialize request argument(s)
-                entity = dataplex_v1.Entity()
-                entity.id = "id_value"
-                entity.type_ = "FILESET"
-                entity.asset = "asset_value"
-                entity.data_path = "data_path_value"
-                entity.system = "BIGQUERY"
-                entity.format_.mime_type = "mime_type_value"
-                entity.schema.user_managed = True
+                content = dataplex_v1.Content()
+                content.data_text = "data_text_value"
+                content.sql_script.engine = "SPARK"
+                content.path = "path_value"
 
-                request = dataplex_v1.UpdateEntityRequest(
-                    entity=entity,
+                request = dataplex_v1.UpdateContentRequest(
+                    content=content,
                 )
 
                 # Make the request
-                response = client.update_entity(request=request)
+                response = client.update_content(request=request)
 
                 # Handle the response
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataplex_v1.types.UpdateEntityRequest, dict]):
-                The request object. Update a metadata entity request.
-                The exiting entity will be fully replaced by the entity
-                in the request. The entity ID is mutable. To modify the
-                ID, use the current entity ID in the request URL and
-                specify the new ID in the request body.
+            request (Union[google.cloud.dataplex_v1.types.UpdateContentRequest, dict]):
+                The request object. Update content request.
+            content (google.cloud.dataplex_v1.types.Content):
+                Required. Update description. Only fields specified in
+                ``update_mask`` are updated.
+
+                This corresponds to the ``content`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            update_mask (google.protobuf.field_mask_pb2.FieldMask):
+                Required. Mask of fields to update.
+                This corresponds to the ``update_mask`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -606,28 +582,43 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.dataplex_v1.types.Entity:
-                Represents tables and fileset
-                metadata contained within a zone.
+            google.cloud.dataplex_v1.types.Content:
+                Content represents a user-visible
+                notebook or a sql script
 
         """
         # Create or coerce a protobuf request object.
+        # Quick check: If we got a request object, we should *not* have
+        # gotten any keyword arguments that map to the request.
+        has_flattened_params = any([content, update_mask])
+        if request is not None and has_flattened_params:
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
+
         # Minor optimization to avoid making a copy if the user passes
-        # in a metadata_.UpdateEntityRequest.
+        # in a gcd_content.UpdateContentRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, metadata_.UpdateEntityRequest):
-            request = metadata_.UpdateEntityRequest(request)
+        if not isinstance(request, gcd_content.UpdateContentRequest):
+            request = gcd_content.UpdateContentRequest(request)
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
+            if content is not None:
+                request.content = content
+            if update_mask is not None:
+                request.update_mask = update_mask
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.update_entity]
+        rpc = self._transport._wrapped_methods[self._transport.update_content]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
             gapic_v1.routing_header.to_grpc_metadata(
-                (("entity.name", request.entity.name),)
+                (("content.name", request.content.name),)
             ),
         )
 
@@ -637,41 +628,40 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
         # Done; return the response.
         return response
 
-    def delete_entity(
+    def delete_content(
         self,
-        request: Union[metadata_.DeleteEntityRequest, dict] = None,
+        request: Union[content.DeleteContentRequest, dict] = None,
         *,
         name: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
-        r"""Delete a metadata entity.
+        r"""Delete a content.
 
 
         .. code-block::
 
             from google.cloud import dataplex_v1
 
-            def sample_delete_entity():
+            def sample_delete_content():
                 # Create a client
-                client = dataplex_v1.MetadataServiceClient()
+                client = dataplex_v1.ContentServiceClient()
 
                 # Initialize request argument(s)
-                request = dataplex_v1.DeleteEntityRequest(
+                request = dataplex_v1.DeleteContentRequest(
                     name="name_value",
-                    etag="etag_value",
                 )
 
                 # Make the request
-                client.delete_entity(request=request)
+                client.delete_content(request=request)
 
         Args:
-            request (Union[google.cloud.dataplex_v1.types.DeleteEntityRequest, dict]):
-                The request object. Delete a metadata entity request.
+            request (Union[google.cloud.dataplex_v1.types.DeleteContentRequest, dict]):
+                The request object. Delete content request.
             name (str):
-                Required. The resource name of the entity:
-                ``projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}``.
+                Required. The resource name of the content:
+                projects/{project_id}/locations/{location_id}/lakes/{lake_id}/content/{content_id}
 
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -693,11 +683,11 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
             )
 
         # Minor optimization to avoid making a copy if the user passes
-        # in a metadata_.DeleteEntityRequest.
+        # in a content.DeleteContentRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, metadata_.DeleteEntityRequest):
-            request = metadata_.DeleteEntityRequest(request)
+        if not isinstance(request, content.DeleteContentRequest):
+            request = content.DeleteContentRequest(request)
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
             if name is not None:
@@ -705,7 +695,7 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.delete_entity]
+        rpc = self._transport._wrapped_methods[self._transport.delete_content]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -718,43 +708,43 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
             request, retry=retry, timeout=timeout, metadata=metadata,
         )
 
-    def get_entity(
+    def get_content(
         self,
-        request: Union[metadata_.GetEntityRequest, dict] = None,
+        request: Union[content.GetContentRequest, dict] = None,
         *,
         name: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> metadata_.Entity:
-        r"""Get a metadata entity.
+    ) -> analyze.Content:
+        r"""Get a content resource.
 
 
         .. code-block::
 
             from google.cloud import dataplex_v1
 
-            def sample_get_entity():
+            def sample_get_content():
                 # Create a client
-                client = dataplex_v1.MetadataServiceClient()
+                client = dataplex_v1.ContentServiceClient()
 
                 # Initialize request argument(s)
-                request = dataplex_v1.GetEntityRequest(
+                request = dataplex_v1.GetContentRequest(
                     name="name_value",
                 )
 
                 # Make the request
-                response = client.get_entity(request=request)
+                response = client.get_content(request=request)
 
                 # Handle the response
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataplex_v1.types.GetEntityRequest, dict]):
-                The request object. Get metadata entity request.
+            request (Union[google.cloud.dataplex_v1.types.GetContentRequest, dict]):
+                The request object. Get content request.
             name (str):
-                Required. The resource name of the entity:
-                ``projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}.``
+                Required. The resource name of the content:
+                projects/{project_id}/locations/{location_id}/lakes/{lake_id}/content/{content_id}
 
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -766,9 +756,9 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.dataplex_v1.types.Entity:
-                Represents tables and fileset
-                metadata contained within a zone.
+            google.cloud.dataplex_v1.types.Content:
+                Content represents a user-visible
+                notebook or a sql script
 
         """
         # Create or coerce a protobuf request object.
@@ -782,11 +772,11 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
             )
 
         # Minor optimization to avoid making a copy if the user passes
-        # in a metadata_.GetEntityRequest.
+        # in a content.GetContentRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, metadata_.GetEntityRequest):
-            request = metadata_.GetEntityRequest(request)
+        if not isinstance(request, content.GetContentRequest):
+            request = content.GetContentRequest(request)
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
             if name is not None:
@@ -794,7 +784,7 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.get_entity]
+        rpc = self._transport._wrapped_methods[self._transport.get_content]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -808,45 +798,45 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
         # Done; return the response.
         return response
 
-    def list_entities(
+    def list_content(
         self,
-        request: Union[metadata_.ListEntitiesRequest, dict] = None,
+        request: Union[content.ListContentRequest, dict] = None,
         *,
         parent: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> pagers.ListEntitiesPager:
-        r"""List metadata entities in a zone.
+    ) -> pagers.ListContentPager:
+        r"""List content.
 
 
         .. code-block::
 
             from google.cloud import dataplex_v1
 
-            def sample_list_entities():
+            def sample_list_content():
                 # Create a client
-                client = dataplex_v1.MetadataServiceClient()
+                client = dataplex_v1.ContentServiceClient()
 
                 # Initialize request argument(s)
-                request = dataplex_v1.ListEntitiesRequest(
+                request = dataplex_v1.ListContentRequest(
                     parent="parent_value",
-                    view="FILESETS",
                 )
 
                 # Make the request
-                page_result = client.list_entities(request=request)
+                page_result = client.list_content(request=request)
 
                 # Handle the response
                 for response in page_result:
                     print(response)
 
         Args:
-            request (Union[google.cloud.dataplex_v1.types.ListEntitiesRequest, dict]):
-                The request object. List metadata entities request.
+            request (Union[google.cloud.dataplex_v1.types.ListContentRequest, dict]):
+                The request object. List content request. Returns the
+                BASIC Content view.
             parent (str):
-                Required. The resource name of the parent zone:
-                ``projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}``.
+                Required. The resource name of the parent lake:
+                projects/{project_id}/locations/{location_id}/lakes/{lake_id}
 
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -858,8 +848,8 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.dataplex_v1.services.metadata_service.pagers.ListEntitiesPager:
-                List metadata entities response.
+            google.cloud.dataplex_v1.services.content_service.pagers.ListContentPager:
+                List content response.
                 Iterating over this object will yield
                 results and resolve additional pages
                 automatically.
@@ -876,11 +866,11 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
             )
 
         # Minor optimization to avoid making a copy if the user passes
-        # in a metadata_.ListEntitiesRequest.
+        # in a content.ListContentRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, metadata_.ListEntitiesRequest):
-            request = metadata_.ListEntitiesRequest(request)
+        if not isinstance(request, content.ListContentRequest):
+            request = content.ListContentRequest(request)
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
             if parent is not None:
@@ -888,7 +878,7 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.list_entities]
+        rpc = self._transport._wrapped_methods[self._transport.list_content]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -901,385 +891,7 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
         # This method is paged; wrap the response in a pager, which provides
         # an `__iter__` convenience method.
-        response = pagers.ListEntitiesPager(
-            method=rpc, request=request, response=response, metadata=metadata,
-        )
-
-        # Done; return the response.
-        return response
-
-    def create_partition(
-        self,
-        request: Union[metadata_.CreatePartitionRequest, dict] = None,
-        *,
-        parent: str = None,
-        partition: metadata_.Partition = None,
-        retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> metadata_.Partition:
-        r"""Create a metadata partition.
-
-
-        .. code-block::
-
-            from google.cloud import dataplex_v1
-
-            def sample_create_partition():
-                # Create a client
-                client = dataplex_v1.MetadataServiceClient()
-
-                # Initialize request argument(s)
-                partition = dataplex_v1.Partition()
-                partition.values = ['values_value_1', 'values_value_2']
-                partition.location = "location_value"
-
-                request = dataplex_v1.CreatePartitionRequest(
-                    parent="parent_value",
-                    partition=partition,
-                )
-
-                # Make the request
-                response = client.create_partition(request=request)
-
-                # Handle the response
-                print(response)
-
-        Args:
-            request (Union[google.cloud.dataplex_v1.types.CreatePartitionRequest, dict]):
-                The request object. Create metadata partition request.
-            parent (str):
-                Required. The resource name of the parent zone:
-                ``projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}``.
-
-                This corresponds to the ``parent`` field
-                on the ``request`` instance; if ``request`` is provided, this
-                should not be set.
-            partition (google.cloud.dataplex_v1.types.Partition):
-                Required. Partition resource.
-                This corresponds to the ``partition`` field
-                on the ``request`` instance; if ``request`` is provided, this
-                should not be set.
-            retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                should be retried.
-            timeout (float): The timeout for this request.
-            metadata (Sequence[Tuple[str, str]]): Strings which should be
-                sent along with the request as metadata.
-
-        Returns:
-            google.cloud.dataplex_v1.types.Partition:
-                Represents partition metadata
-                contained within entity instances.
-
-        """
-        # Create or coerce a protobuf request object.
-        # Quick check: If we got a request object, we should *not* have
-        # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([parent, partition])
-        if request is not None and has_flattened_params:
-            raise ValueError(
-                "If the `request` argument is set, then none of "
-                "the individual field arguments should be set."
-            )
-
-        # Minor optimization to avoid making a copy if the user passes
-        # in a metadata_.CreatePartitionRequest.
-        # There's no risk of modifying the input as we've already verified
-        # there are no flattened fields.
-        if not isinstance(request, metadata_.CreatePartitionRequest):
-            request = metadata_.CreatePartitionRequest(request)
-            # If we have keyword arguments corresponding to fields on the
-            # request, apply these.
-            if parent is not None:
-                request.parent = parent
-            if partition is not None:
-                request.partition = partition
-
-        # Wrap the RPC method; this adds retry and timeout information,
-        # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.create_partition]
-
-        # Certain fields should be provided within the metadata header;
-        # add these here.
-        metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
-        )
-
-        # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
-
-        # Done; return the response.
-        return response
-
-    def delete_partition(
-        self,
-        request: Union[metadata_.DeletePartitionRequest, dict] = None,
-        *,
-        name: str = None,
-        retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> None:
-        r"""Delete a metadata partition.
-
-
-        .. code-block::
-
-            from google.cloud import dataplex_v1
-
-            def sample_delete_partition():
-                # Create a client
-                client = dataplex_v1.MetadataServiceClient()
-
-                # Initialize request argument(s)
-                request = dataplex_v1.DeletePartitionRequest(
-                    name="name_value",
-                )
-
-                # Make the request
-                client.delete_partition(request=request)
-
-        Args:
-            request (Union[google.cloud.dataplex_v1.types.DeletePartitionRequest, dict]):
-                The request object. Delete metadata partition request.
-            name (str):
-                Required. The resource name of the partition. format:
-                ``projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}/partitions/{partition_value_path}``.
-                The {partition_value_path} segment consists of an
-                ordered sequence of partition values separated by "/".
-                All values must be provided.
-
-                This corresponds to the ``name`` field
-                on the ``request`` instance; if ``request`` is provided, this
-                should not be set.
-            retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                should be retried.
-            timeout (float): The timeout for this request.
-            metadata (Sequence[Tuple[str, str]]): Strings which should be
-                sent along with the request as metadata.
-        """
-        # Create or coerce a protobuf request object.
-        # Quick check: If we got a request object, we should *not* have
-        # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([name])
-        if request is not None and has_flattened_params:
-            raise ValueError(
-                "If the `request` argument is set, then none of "
-                "the individual field arguments should be set."
-            )
-
-        # Minor optimization to avoid making a copy if the user passes
-        # in a metadata_.DeletePartitionRequest.
-        # There's no risk of modifying the input as we've already verified
-        # there are no flattened fields.
-        if not isinstance(request, metadata_.DeletePartitionRequest):
-            request = metadata_.DeletePartitionRequest(request)
-            # If we have keyword arguments corresponding to fields on the
-            # request, apply these.
-            if name is not None:
-                request.name = name
-
-        # Wrap the RPC method; this adds retry and timeout information,
-        # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.delete_partition]
-
-        # Certain fields should be provided within the metadata header;
-        # add these here.
-        metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
-        )
-
-        # Send the request.
-        rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
-        )
-
-    def get_partition(
-        self,
-        request: Union[metadata_.GetPartitionRequest, dict] = None,
-        *,
-        name: str = None,
-        retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> metadata_.Partition:
-        r"""Get a metadata partition of an entity.
-
-
-        .. code-block::
-
-            from google.cloud import dataplex_v1
-
-            def sample_get_partition():
-                # Create a client
-                client = dataplex_v1.MetadataServiceClient()
-
-                # Initialize request argument(s)
-                request = dataplex_v1.GetPartitionRequest(
-                    name="name_value",
-                )
-
-                # Make the request
-                response = client.get_partition(request=request)
-
-                # Handle the response
-                print(response)
-
-        Args:
-            request (Union[google.cloud.dataplex_v1.types.GetPartitionRequest, dict]):
-                The request object. Get metadata partition request.
-            name (str):
-                Required. The resource name of the partition:
-                ``projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}/partitions/{partition_value_path}``.
-                The {partition_value_path} segment consists of an
-                ordered sequence of partition values separated by "/".
-                All values must be provided.
-
-                This corresponds to the ``name`` field
-                on the ``request`` instance; if ``request`` is provided, this
-                should not be set.
-            retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                should be retried.
-            timeout (float): The timeout for this request.
-            metadata (Sequence[Tuple[str, str]]): Strings which should be
-                sent along with the request as metadata.
-
-        Returns:
-            google.cloud.dataplex_v1.types.Partition:
-                Represents partition metadata
-                contained within entity instances.
-
-        """
-        # Create or coerce a protobuf request object.
-        # Quick check: If we got a request object, we should *not* have
-        # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([name])
-        if request is not None and has_flattened_params:
-            raise ValueError(
-                "If the `request` argument is set, then none of "
-                "the individual field arguments should be set."
-            )
-
-        # Minor optimization to avoid making a copy if the user passes
-        # in a metadata_.GetPartitionRequest.
-        # There's no risk of modifying the input as we've already verified
-        # there are no flattened fields.
-        if not isinstance(request, metadata_.GetPartitionRequest):
-            request = metadata_.GetPartitionRequest(request)
-            # If we have keyword arguments corresponding to fields on the
-            # request, apply these.
-            if name is not None:
-                request.name = name
-
-        # Wrap the RPC method; this adds retry and timeout information,
-        # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.get_partition]
-
-        # Certain fields should be provided within the metadata header;
-        # add these here.
-        metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
-        )
-
-        # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
-
-        # Done; return the response.
-        return response
-
-    def list_partitions(
-        self,
-        request: Union[metadata_.ListPartitionsRequest, dict] = None,
-        *,
-        parent: str = None,
-        retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> pagers.ListPartitionsPager:
-        r"""List metadata partitions of an entity.
-
-
-        .. code-block::
-
-            from google.cloud import dataplex_v1
-
-            def sample_list_partitions():
-                # Create a client
-                client = dataplex_v1.MetadataServiceClient()
-
-                # Initialize request argument(s)
-                request = dataplex_v1.ListPartitionsRequest(
-                    parent="parent_value",
-                )
-
-                # Make the request
-                page_result = client.list_partitions(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
-        Args:
-            request (Union[google.cloud.dataplex_v1.types.ListPartitionsRequest, dict]):
-                The request object. List metadata partitions request.
-            parent (str):
-                Required. The resource name of the parent entity:
-                ``projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}``.
-
-                This corresponds to the ``parent`` field
-                on the ``request`` instance; if ``request`` is provided, this
-                should not be set.
-            retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                should be retried.
-            timeout (float): The timeout for this request.
-            metadata (Sequence[Tuple[str, str]]): Strings which should be
-                sent along with the request as metadata.
-
-        Returns:
-            google.cloud.dataplex_v1.services.metadata_service.pagers.ListPartitionsPager:
-                List metadata partitions response.
-                Iterating over this object will yield
-                results and resolve additional pages
-                automatically.
-
-        """
-        # Create or coerce a protobuf request object.
-        # Quick check: If we got a request object, we should *not* have
-        # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([parent])
-        if request is not None and has_flattened_params:
-            raise ValueError(
-                "If the `request` argument is set, then none of "
-                "the individual field arguments should be set."
-            )
-
-        # Minor optimization to avoid making a copy if the user passes
-        # in a metadata_.ListPartitionsRequest.
-        # There's no risk of modifying the input as we've already verified
-        # there are no flattened fields.
-        if not isinstance(request, metadata_.ListPartitionsRequest):
-            request = metadata_.ListPartitionsRequest(request)
-            # If we have keyword arguments corresponding to fields on the
-            # request, apply these.
-            if parent is not None:
-                request.parent = parent
-
-        # Wrap the RPC method; this adds retry and timeout information,
-        # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.list_partitions]
-
-        # Certain fields should be provided within the metadata header;
-        # add these here.
-        metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
-        )
-
-        # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
-
-        # This method is paged; wrap the response in a pager, which provides
-        # an `__iter__` convenience method.
-        response = pagers.ListPartitionsPager(
+        response = pagers.ListContentPager(
             method=rpc, request=request, response=response, metadata=metadata,
         )
 
@@ -1308,4 +920,4 @@ except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
 
 
-__all__ = ("MetadataServiceClient",)
+__all__ = ("ContentServiceClient",)
