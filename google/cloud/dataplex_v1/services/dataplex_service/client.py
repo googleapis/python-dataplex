@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -633,7 +633,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_create_lake():
                 # Create a client
@@ -779,7 +779,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_update_lake():
                 # Create a client
@@ -907,7 +907,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_delete_lake():
                 # Create a client
@@ -1026,7 +1026,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_list_lakes():
                 # Create a client
@@ -1134,7 +1134,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_get_lake():
                 # Create a client
@@ -1242,7 +1242,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_list_lake_actions():
                 # Create a client
@@ -1350,7 +1350,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_create_zone():
                 # Create a client
@@ -1495,7 +1495,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_update_zone():
                 # Create a client
@@ -1621,7 +1621,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_delete_zone():
                 # Create a client
@@ -1740,7 +1740,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_list_zones():
                 # Create a client
@@ -1846,7 +1846,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_get_zone():
                 # Create a client
@@ -1946,7 +1946,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_list_zone_actions():
                 # Create a client
@@ -2054,7 +2054,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_create_asset():
                 # Create a client
@@ -2192,7 +2192,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_update_asset():
                 # Create a client
@@ -2315,7 +2315,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_delete_asset():
                 # Create a client
@@ -2434,7 +2434,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_list_assets():
                 # Create a client
@@ -2540,7 +2540,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_get_asset():
                 # Create a client
@@ -2635,7 +2635,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_list_asset_actions():
                 # Create a client
@@ -2743,7 +2743,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_create_task():
                 # Create a client
@@ -2875,7 +2875,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_update_task():
                 # Create a client
@@ -2999,7 +2999,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_delete_task():
                 # Create a client
@@ -3118,7 +3118,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_list_tasks():
                 # Create a client
@@ -3224,7 +3224,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_get_task():
                 # Create a client
@@ -3316,7 +3316,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_list_jobs():
                 # Create a client
@@ -3422,7 +3422,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_get_job():
                 # Create a client
@@ -3516,7 +3516,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_cancel_job():
                 # Create a client
@@ -3600,7 +3600,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_create_environment():
                 # Create a client
@@ -3736,7 +3736,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_update_environment():
                 # Create a client
@@ -3859,7 +3859,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_delete_environment():
                 # Create a client
@@ -3978,7 +3978,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_list_environments():
                 # Create a client
@@ -4084,7 +4084,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_get_environment():
                 # Create a client
@@ -4179,7 +4179,7 @@ class DataplexServiceClient(metaclass=DataplexServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import dataplex_v1
+                    from google.cloud import dataplex_v1
 
             def sample_list_sessions():
                 # Create a client
