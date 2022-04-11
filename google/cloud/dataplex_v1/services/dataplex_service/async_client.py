@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core.client_options import ClientOptions
@@ -516,7 +516,6 @@ class DataplexServiceAsyncClient:
         r"""Deletes a lake resource. All zones within the lake
         must be deleted before the lake can be deleted.
 
-
         .. code-block:: python
 
             from google.cloud import dataplex_v1
@@ -708,7 +707,7 @@ class DataplexServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -834,7 +833,7 @@ class DataplexServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -940,7 +939,7 @@ class DataplexServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -1257,7 +1256,6 @@ class DataplexServiceAsyncClient:
         r"""Deletes a zone resource. All assets within a zone
         must be deleted before the zone can be deleted.
 
-
         .. code-block:: python
 
             from google.cloud import dataplex_v1
@@ -1447,7 +1445,7 @@ class DataplexServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -1565,7 +1563,7 @@ class DataplexServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -1671,7 +1669,7 @@ class DataplexServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -1978,7 +1976,6 @@ class DataplexServiceAsyncClient:
         resource is detached (default) or deleted based on the
         associated Lifecycle policy.
 
-
         .. code-block:: python
 
             from google.cloud import dataplex_v1
@@ -2168,7 +2165,7 @@ class DataplexServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -2281,7 +2278,7 @@ class DataplexServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -2387,7 +2384,7 @@ class DataplexServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -2879,7 +2876,7 @@ class DataplexServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -2989,7 +2986,7 @@ class DataplexServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -3095,7 +3092,7 @@ class DataplexServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -3207,7 +3204,7 @@ class DataplexServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -3584,7 +3581,6 @@ class DataplexServiceAsyncClient:
         r"""Delete the environment resource. All the child
         resources must have been deleted before environment
         deletion can be initiated.
-
 
         .. code-block:: python
 
