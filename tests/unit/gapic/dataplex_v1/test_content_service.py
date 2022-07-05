@@ -2303,7 +2303,6 @@ def test_content_service_transport_auth_adc(transport_class):
     [
         transports.ContentServiceGrpcTransport,
         transports.ContentServiceGrpcAsyncIOTransport,
-        transports.ContentServiceRestTransport,
     ],
 )
 def test_content_service_transport_auth_gdch_credentials(transport_class):

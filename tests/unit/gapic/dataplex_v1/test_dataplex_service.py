@@ -10547,7 +10547,6 @@ def test_dataplex_service_transport_auth_adc(transport_class):
     [
         transports.DataplexServiceGrpcTransport,
         transports.DataplexServiceGrpcAsyncIOTransport,
-        transports.DataplexServiceRestTransport,
     ],
 )
 def test_dataplex_service_transport_auth_gdch_credentials(transport_class):
