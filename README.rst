@@ -3,7 +3,7 @@ Python Client for Cloud Dataplex API API
 
 |stable| |pypi| |versions|
 
-`Cloud Dataplex API API`_: 
+`Cloud Dataplex API API`_: provides intelligent data fabric that enables organizations to centrally manage, monitor, and govern their data across data lakes, data warehouses, and data marts with consistent controls, providing access to trusted data and powering analytics at scale.
 
 - `Client Library Documentation`_
 - `Product Documentation`_
