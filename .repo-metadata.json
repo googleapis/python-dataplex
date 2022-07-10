@@ -1,6 +1,6 @@
 {
     "name": "dataplex",
-    "name_pretty": "Cloud Dataplex API",
+    "name_pretty": "Cloud Dataplex",
     "product_documentation": "https://cloud.google.com/dataplex",
     "client_documentation": "https://cloud.google.com/python/docs/reference/dataplex/latest",
     "issue_tracker": "",
