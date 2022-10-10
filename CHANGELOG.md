@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/googleapis/python-dataplex/compare/v1.1.2...v1.1.3) (2022-10-10)
+
+
+### Bug Fixes
+
+* **deps:** Allow protobuf 3.19.5 ([#103](https://github.com/googleapis/python-dataplex/issues/103)) ([65adbb3](https://github.com/googleapis/python-dataplex/commit/65adbb31c94794f27a78b309550c519734a7b030))
+
 ## [1.1.2](https://github.com/googleapis/python-dataplex/compare/v1.1.1...v1.1.2) (2022-09-29)
 
 
