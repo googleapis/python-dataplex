@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -64,7 +75,7 @@ class MetadataServiceClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[MetadataServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -399,7 +410,7 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, MetadataServiceTransport, None] = None,
+        transport: Optional[Union[str, MetadataServiceTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -497,12 +508,12 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def create_entity(
         self,
-        request: Union[metadata_.CreateEntityRequest, dict] = None,
+        request: Optional[Union[metadata_.CreateEntityRequest, dict]] = None,
         *,
-        parent: str = None,
-        entity: metadata_.Entity = None,
+        parent: Optional[str] = None,
+        entity: Optional[metadata_.Entity] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> metadata_.Entity:
         r"""Create a metadata entity.
@@ -616,10 +627,10 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def update_entity(
         self,
-        request: Union[metadata_.UpdateEntityRequest, dict] = None,
+        request: Optional[Union[metadata_.UpdateEntityRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> metadata_.Entity:
         r"""Update a metadata entity. Only supports full resource
@@ -712,11 +723,11 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def delete_entity(
         self,
-        request: Union[metadata_.DeleteEntityRequest, dict] = None,
+        request: Optional[Union[metadata_.DeleteEntityRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
         r"""Delete a metadata entity.
@@ -802,11 +813,11 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def get_entity(
         self,
-        request: Union[metadata_.GetEntityRequest, dict] = None,
+        request: Optional[Union[metadata_.GetEntityRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> metadata_.Entity:
         r"""Get a metadata entity.
@@ -903,11 +914,11 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def list_entities(
         self,
-        request: Union[metadata_.ListEntitiesRequest, dict] = None,
+        request: Optional[Union[metadata_.ListEntitiesRequest, dict]] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListEntitiesPager:
         r"""List metadata entities in a zone.
@@ -1017,12 +1028,12 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def create_partition(
         self,
-        request: Union[metadata_.CreatePartitionRequest, dict] = None,
+        request: Optional[Union[metadata_.CreatePartitionRequest, dict]] = None,
         *,
-        parent: str = None,
-        partition: metadata_.Partition = None,
+        parent: Optional[str] = None,
+        partition: Optional[metadata_.Partition] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> metadata_.Partition:
         r"""Create a metadata partition.
@@ -1131,11 +1142,11 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def delete_partition(
         self,
-        request: Union[metadata_.DeletePartitionRequest, dict] = None,
+        request: Optional[Union[metadata_.DeletePartitionRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
         r"""Delete a metadata partition.
@@ -1223,11 +1234,11 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def get_partition(
         self,
-        request: Union[metadata_.GetPartitionRequest, dict] = None,
+        request: Optional[Union[metadata_.GetPartitionRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> metadata_.Partition:
         r"""Get a metadata partition of an entity.
@@ -1327,11 +1338,11 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def list_partitions(
         self,
-        request: Union[metadata_.ListPartitionsRequest, dict] = None,
+        request: Optional[Union[metadata_.ListPartitionsRequest, dict]] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPartitionsPager:
         r"""List metadata partitions of an entity.
@@ -1453,10 +1464,10 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def list_operations(
         self,
-        request: operations_pb2.ListOperationsRequest = None,
+        request: Optional[operations_pb2.ListOperationsRequest] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operations_pb2.ListOperationsResponse:
         r"""Lists operations that match the specified filter in the request.
@@ -1507,10 +1518,10 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def get_operation(
         self,
-        request: operations_pb2.GetOperationRequest = None,
+        request: Optional[operations_pb2.GetOperationRequest] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operations_pb2.Operation:
         r"""Gets the latest state of a long-running operation.
@@ -1561,10 +1572,10 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def delete_operation(
         self,
-        request: operations_pb2.DeleteOperationRequest = None,
+        request: Optional[operations_pb2.DeleteOperationRequest] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
         r"""Deletes a long-running operation.
@@ -1616,10 +1627,10 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def cancel_operation(
         self,
-        request: operations_pb2.CancelOperationRequest = None,
+        request: Optional[operations_pb2.CancelOperationRequest] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
         r"""Starts asynchronous cancellation on a long-running operation.
@@ -1670,10 +1681,10 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def get_location(
         self,
-        request: locations_pb2.GetLocationRequest = None,
+        request: Optional[locations_pb2.GetLocationRequest] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> locations_pb2.Location:
         r"""Gets information about a location.
@@ -1724,10 +1735,10 @@ class MetadataServiceClient(metaclass=MetadataServiceClientMeta):
 
     def list_locations(
         self,
-        request: locations_pb2.ListLocationsRequest = None,
+        request: Optional[locations_pb2.ListLocationsRequest] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> locations_pb2.ListLocationsResponse:
         r"""Lists information about the supported locations for this service.
