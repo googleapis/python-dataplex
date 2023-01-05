@@ -327,12 +327,17 @@ class DataScanServiceAsyncClient:
                 An object representing a long-running operation.
 
                 The result type for the operation will be :class:`google.cloud.dataplex_v1.types.DataScan` Represents a user-visible job which provides the insights for the related
-                   data source. For examples: - Data Quality: generates
-                   queries based on the rules and run against the data
-                   to get data quality check results. - Data Profile:
-                   analyzes the data in table(s) and generates insights
-                   about the structure, content and relationships (such
-                   as null percent, cardinality, min/max/mean, etc).
+                   data source.
+
+                   For example:
+
+                   -  Data Quality: generates queries based on the rules
+                      and runs against the data to get data quality
+                      check results.
+                   -  Data Profile: analyzes the data in table(s) and
+                      generates insights about the structure, content
+                      and relationships (such as null percent,
+                      cardinality, min/max/mean, etc).
 
         """
         # Create or coerce a protobuf request object.
@@ -460,12 +465,17 @@ class DataScanServiceAsyncClient:
                 An object representing a long-running operation.
 
                 The result type for the operation will be :class:`google.cloud.dataplex_v1.types.DataScan` Represents a user-visible job which provides the insights for the related
-                   data source. For examples: - Data Quality: generates
-                   queries based on the rules and run against the data
-                   to get data quality check results. - Data Profile:
-                   analyzes the data in table(s) and generates insights
-                   about the structure, content and relationships (such
-                   as null percent, cardinality, min/max/mean, etc).
+                   data source.
+
+                   For example:
+
+                   -  Data Quality: generates queries based on the rules
+                      and runs against the data to get data quality
+                      check results.
+                   -  Data Profile: analyzes the data in table(s) and
+                      generates insights about the structure, content
+                      and relationships (such as null percent,
+                      cardinality, min/max/mean, etc).
 
         """
         # Create or coerce a protobuf request object.
@@ -706,17 +716,18 @@ class DataScanServiceAsyncClient:
 
         Returns:
             google.cloud.dataplex_v1.types.DataScan:
-                Represents a user-visible job which
-                provides the insights for the related
-                data source. For examples:
-                  - Data Quality: generates queries
-                based on the rules and run against the
-                data to get data quality check results.
-                - Data Profile: analyzes the data in
-                table(s) and generates insights about
-                the structure, content and relationships
-                (such as null percent,     cardinality,
-                min/max/mean, etc).
+                Represents a user-visible job which provides the insights for the related
+                   data source.
+
+                   For example:
+
+                   -  Data Quality: generates queries based on the rules
+                      and runs against the data to get data quality
+                      check results.
+                   -  Data Profile: analyzes the data in table(s) and
+                      generates insights about the structure, content
+                      and relationships (such as null percent,
+                      cardinality, min/max/mean, etc).
 
         """
         # Create or coerce a protobuf request object.

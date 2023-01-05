@@ -374,14 +374,16 @@ class ListDataScanJobsResponse(proto.Message):
 
 
 class DataScan(proto.Message):
-    r"""Represents a user-visible job which provides the insights for
-    the related data source.
-    For examples:
-      - Data Quality: generates queries based on the rules and run
-    against the     data to get data quality check results.
-      - Data Profile: analyzes the data in table(s) and generates
-    insights about     the structure, content and relationships
-    (such as null percent,     cardinality, min/max/mean, etc).
+    r"""Represents a user-visible job which provides the insights for the
+    related data source.
+
+    For example:
+
+    -  Data Quality: generates queries based on the rules and runs
+       against the data to get data quality check results.
+    -  Data Profile: analyzes the data in table(s) and generates
+       insights about the structure, content and relationships (such as
+       null percent, cardinality, min/max/mean, etc).
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
